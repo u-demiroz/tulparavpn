@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Privacy Policy — Tulpara VPN</title>
+  <meta name="description" content="Tulpara VPN Privacy Policy — We never log, track or share your activity." />
+  <link rel="icon" href="assets/logo.png" type="image/png" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #080810;
+      --bg2: #0e0e1a;
+      --accent: #7c5cfc;
+      --accent2: #a78bfa;
+      --accent-glow: rgba(124, 92, 252, 0.3);
+      --text: #f0f0ff;
+      --text2: #9090b0;
+      --border: rgba(124, 92, 252, 0.2);
+      --card: rgba(255,255,255,0.04);
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1rem 5%;
+      background: rgba(8, 8, 16, 0.92);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo {
+      display: flex; align-items: center; gap: 0.75rem; text-decoration: none;
+    }
+    .nav-logo img { width: 36px; height: 36px; object-fit: contain; }
+    .nav-logo span { font-size: 1.1rem; font-weight: 700; color: var(--text); letter-spacing: 0.05em; }
+    .nav-logo .vpn-badge {
+      font-size: 0.6rem; font-weight: 600; letter-spacing: 0.12em;
+      color: var(--accent2); border: 1px solid var(--accent);
+      padding: 1px 6px; border-radius: 4px;
+    }
+    .nav-right { display: flex; align-items: center; gap: 1.2rem; }
+    .nav-back {
+      font-size: 0.8rem; color: var(--text2); text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-back:hover { color: var(--accent2); }
+    .lang-switcher { display: flex; gap: 0.4rem; }
+    .lang-btn {
+      background: none; border: 1px solid transparent;
+      color: var(--text2); padding: 0.3rem 0.65rem;
+      border-radius: 6px; cursor: pointer;
+      font-size: 0.78rem; font-weight: 500; transition: all 0.2s;
+    }
+    .lang-btn:hover { color: var(--text); border-color: var(--border); }
+    .lang-btn.active {
+      color: var(--accent2); border-color: var(--accent);
+      background: rgba(124, 92, 252, 0.1);
+    }
+
+    /* ── HERO ── */
+    .page-hero {
+      padding: 8rem 5% 3rem;
+      max-width: 860px; margin: 0 auto;
+      text-align: center;
+    }
+    .hero-badge {
+      display: inline-block;
+      font-size: 0.72rem; font-weight: 600; letter-spacing: 0.15em;
+      text-transform: uppercase; color: var(--accent2);
+      border: 1px solid var(--accent); border-radius: 20px;
+      padding: 0.35rem 1rem; margin-bottom: 1.25rem;
+    }
+    .page-hero h1 {
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 800; margin-bottom: 0.75rem; line-height: 1.15;
+    }
+    .page-hero p {
+      color: var(--text2); font-size: 0.95rem; line-height: 1.7;
+      max-width: 560px; margin: 0 auto;
+    }
+    .last-updated {
+      margin-top: 1rem;
+      font-size: 0.78rem; color: var(--text2);
+      opacity: 0.7;
+    }
+
+    /* ── CONTENT ── */
+    .content {
+      max-width: 860px; margin: 0 auto;
+      padding: 2rem 5% 6rem;
+    }
+
+    .policy-section {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 2rem 2.25rem;
+      margin-bottom: 1.25rem;
+      transition: border-color 0.2s;
+    }
+    .policy-section:hover { border-color: rgba(124, 92, 252, 0.4); }
+
+    .policy-section-header {
+      display: flex; align-items: center; gap: 0.9rem;
+      margin-bottom: 1.1rem;
+    }
+    .policy-icon {
+      width: 40px; height: 40px; border-radius: 10px; flex-shrink: 0;
+      background: rgba(124, 92, 252, 0.15);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.15rem;
+    }
+    .policy-section h2 {
+      font-size: 1.05rem; font-weight: 700; color: var(--text);
+    }
+    .policy-section p, .policy-section li {
+      font-size: 0.9rem; color: var(--text2); line-height: 1.75;
+    }
+    .policy-section ul {
+      padding-left: 1.25rem; margin-top: 0.5rem;
+    }
+    .policy-section li { margin-bottom: 0.4rem; }
+    .policy-section li::marker { color: var(--accent2); }
+    .policy-section p + p { margin-top: 0.75rem; }
+
+    .highlight-box {
+      background: rgba(124, 92, 252, 0.08);
+      border: 1px solid rgba(124, 92, 252, 0.3);
+      border-radius: 12px; padding: 1.25rem 1.5rem;
+      margin-bottom: 1.25rem;
+      display: flex; gap: 1rem; align-items: flex-start;
+    }
+    .highlight-box .hl-icon { font-size: 1.4rem; flex-shrink: 0; margin-top: 0.1rem; }
+    .highlight-box p {
+      font-size: 0.9rem; line-height: 1.6;
+      color: var(--accent2); font-weight: 500;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 2rem 5%; text-align: center;
+      color: var(--text2); font-size: 0.8rem;
+    }
+    footer a { color: var(--accent2); text-decoration: none; }
+
+    @media (max-width: 600px) {
+      .policy-section { padding: 1.5rem 1.25rem; }
+      .nav-back { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="index.html">
+    <img src="assets/logo.png" alt="Tulpara" />
+    <span>TULPARA</span>
+    <span class="vpn-badge">VPN</span>
+  </a>
+  <div class="nav-right">
+    <a class="nav-back" href="index.html" data-i18n="nav_back">← Back to Home</a>
+    <div class="lang-switcher">
+      <button class="lang-btn active" onclick="setLang('en')">EN</button>
+      <button class="lang-btn" onclick="setLang('tr')">TR</button>
+      <button class="lang-btn" onclick="setLang('es')">ES</button>
+      <button class="lang-btn" onclick="setLang('ru')">RU</button>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="page-hero">
+  <div class="hero-badge" data-i18n="badge">Privacy Policy</div>
+  <h1 data-i18n="hero_title">Your privacy is our priority</h1>
+  <p data-i18n="hero_desc">We built Tulpara VPN with a single promise: we will never log, track, or share your online activity. Ever.</p>
+  <p class="last-updated" data-i18n="last_updated">Last updated: January 1, 2025</p>
+</div>
+
+<!-- CONTENT -->
+<div class="content">
+
+  <!-- Highlight -->
+  <div class="highlight-box">
+    <div class="hl-icon">🛡️</div>
+    <p data-i18n="highlight">Tulpara VPN operates under a strict No-Log Policy. We do not collect, store, or share your IP address, browsing history, traffic data, DNS queries, or any other personal activity while using our VPN service.</p>
+  </div>
+
+  <!-- 1. Information We Collect -->
+  <div class="policy-section">
+    <div class="policy-section-header">
+      <div class="policy-icon">📋</div>
+      <h2 data-i18n="s1_title">1. Information We Collect</h2>
+    </div>
+    <p data-i18n="s1_p1">We collect only the minimum information necessary to provide our service:</p>
+    <ul>
+      <li data-i18n="s1_l1"><strong>Account information:</strong> Email address and password (hashed) when you create an account.</li>
+      <li data-i18n="s1_l2"><strong>Payment information:</strong> Processed securely by third-party payment providers. We do not store your card details.</li>
+      <li data-i18n="s1_l3"><strong>App diagnostics:</strong> Anonymous crash reports to improve app stability. This data is never linked to your identity.</li>
+    </ul>
+    <p data-i18n="s1_p2">We do <strong>not</strong> collect: your IP address, browsing history, DNS queries, traffic data, connection timestamps, bandwidth usage, or any other activity data.</p>
+  </div>
+
+  <!-- 2. No-Log Policy -->
+  <div class="policy-section">
+    <div class="policy-section-header">
+      <div class="policy-icon">👁️</div>
+      <h2 data-i18n="s2_title">2. No-Log Policy</h2>
+    </div>
+    <p data-i18n="s2_p1">Tulpara VPN maintains a strict no-log policy. When you connect to our VPN, we do not record:</p>
+    <ul>
+      <li data-i18n="s2_l1">Your real IP address or the VPN server IP assigned to you</li>
+      <li data-i18n="s2_l2">Websites you visit or content you access</li>
+      <li data-i18n="s2_l3">DNS queries made through our servers</li>
+      <li data-i18n="s2_l4">Connection or session timestamps</li>
+      <li data-i18n="s2_l5">Bandwidth used per session</li>
+      <li data-i18n="s2_l6">Any form of traffic data or metadata</li>
+    </ul>
+    <p data-i18n="s2_p2">This means we have nothing to hand over to any third party, government, or law enforcement agency — because we simply don't have it.</p>
+  </div>
+
+  <!-- 3. How We Use Your Data -->
+  <div class="policy-section">
+    <div class="policy-section-header">
+      <div class="policy-icon">🔧</div>
+      <h2 data-i18n="s3_title">3. How We Use Your Data</h2>
+    </div>
+    <p data-i18n="s3_p1">The limited data we collect is used solely for:</p>
+    <ul>
+      <li data-i18n="s3_l1">Account management and authentication</li>
+      <li data-i18n="s3_l2">Processing payments and managing subscriptions</li>
+      <li data-i18n="s3_l3">Sending important service-related notifications</li>
+      <li data-i18n="s3_l4">Improving app performance via anonymous diagnostics</li>
+      <li data-i18n="s3_l5">Responding to customer support requests</li>
+    </ul>
+    <p data-i18n="s3_p2">We do not sell, rent, or share your personal data with any third parties for marketing or advertising purposes.</p>
+  </div>
+
+  <!-- 4. Cookies & Tracking -->
+  <div class="policy-section">
+    <div class="policy-section-header">
+      <div class="policy-icon">🍪</div>
+      <h2 data-i18n="s4_title">4. Cookies & Tracking</h2>
+    </div>
+    <p data-i18n="s4_p1">Our website uses minimal cookies strictly necessary for functionality, such as remembering your language preference and session state. We do not use advertising cookies or cross-site tracking technologies.</p>
+    <p data-i18n="s4_p2">The Tulpara VPN mobile application does not use cookies. Anonymous analytics data may be collected to improve the user experience, and this data cannot be used to identify you.</p>
+  </div>
+
+  <!-- 5. Third-Party Services -->
+  <div class="policy-section">
+    <div class="policy-section-header">
+      <div class="policy-icon">🔗</div>
+      <h2 data-i18n="s5_title">5. Third-Party Services</h2>
+    </div>
+    <p data-i18n="s5_p1">We may use trusted third-party services for the following purposes:</p>
+    <ul>
+      <li data-i18n="s5_l1"><strong>Payment processing:</strong> Stripe or Apple/Google Pay for handling transactions securely.</li>
+      <li data-i18n="s5_l2"><strong>Crash reporting:</strong> Anonymous crash data to fix bugs (no personal data included).</li>
+    </ul>
+    <p data-i18n="s5_p2">These providers are bound by their own privacy policies and are prohibited from using your data for any purpose other than providing their service to us.</p>
+  </div>
+
+  <!-- 6. Data Security -->
+  <div class="policy-section">
+    <div class="policy-section-header">
+      <div class="policy-icon">🔐</div>
+      <h2 data-i18n="s6_title">6. Data Security</h2>
+    </div>
+    <p data-i18n="s6_p1">We protect any data we hold with industry-standard security measures including AES-256 encryption, secure HTTPS connections, and strict access controls. Your account password is stored as a hashed value and is never accessible in plain text.</p>
+    <p data-i18n="s6_p2">In the unlikely event of a data breach, we will notify affected users promptly and take all necessary remediation steps in accordance with applicable laws.</p>
+  </div>
+
+  <!-- 7. Your Rights -->
+  <div class="policy-section">
+    <div class="policy-section-header">
+      <div class="policy-icon">⚖️</div>
+      <h2 data-i18n="s7_title">7. Your Rights</h2>
+    </div>
+    <p data-i18n="s7_p1">Depending on your location, you may have the following rights regarding your personal data:</p>
+    <ul>
+      <li data-i18n="s7_l1"><strong>Access:</strong> Request a copy of the personal data we hold about you.</li>
+      <li data-i18n="s7_l2"><strong>Correction:</strong> Request correction of inaccurate data.</li>
+      <li data-i18n="s7_l3"><strong>Deletion:</strong> Request deletion of your account and associated data.</li>
+      <li data-i18n="s7_l4"><strong>Portability:</strong> Request your data in a portable format.</li>
+      <li data-i18n="s7_l5"><strong>Objection:</strong> Object to certain processing of your data.</li>
+    </ul>
+    <p data-i18n="s7_p2">To exercise any of these rights, contact us at <a href="mailto:privacy@tulparavpn.app" style="color:var(--accent2)">privacy@tulparavpn.app</a>.</p>
+  </div>
+
+  <!-- 8. Children's Privacy -->
+  <div class="policy-section">
+    <div class="policy-section-header">
+      <div class="policy-icon">👶</div>
+      <h2 data-i18n="s8_title">8. Children's Privacy</h2>
+    </div>
+    <p data-i18n="s8_p1">Tulpara VPN is not intended for use by children under the age of 13. We do not knowingly collect personal data from children. If you believe a child has provided us with personal data, please contact us immediately and we will delete it.</p>
+  </div>
+
+  <!-- 9. Changes to This Policy -->
+  <div class="policy-section">
+    <div class="policy-section-header">
+      <div class="policy-icon">📝</div>
+      <h2 data-i18n="s9_title">9. Changes to This Policy</h2>
+    </div>
+    <p data-i18n="s9_p1">We may update this Privacy Policy from time to time. When we do, we will update the "Last updated" date at the top of this page and, where appropriate, notify you via email or in-app notification.</p>
+    <p data-i18n="s9_p2">Continued use of Tulpara VPN after any changes constitutes your acceptance of the updated policy.</p>
+  </div>
+
+  <!-- 10. Contact -->
+  <div class="policy-section">
+    <div class="policy-section-header">
+      <div class="policy-icon">✉️</div>
+      <h2 data-i18n="s10_title">10. Contact Us</h2>
+    </div>
+    <p data-i18n="s10_p1">If you have any questions, concerns, or requests regarding this Privacy Policy or our data practices, please contact us:</p>
+    <ul>
+      <li><strong data-i18n="contact_email_label">Email:</strong> <a href="mailto:privacy@tulparavpn.app" style="color:var(--accent2)">privacy@tulparavpn.app</a></li>
+      <li><strong data-i18n="contact_web_label">Website:</strong> <a href="https://tulparavpn.app" style="color:var(--accent2)">tulparavpn.app</a></li>
+    </ul>
+    <p data-i18n="s10_p2" style="margin-top:0.75rem">We will respond to all legitimate requests within 30 days.</p>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2025 Tulpara VPN. <span data-i18n="footer_rights">All rights reserved.</span>
+  &nbsp;·&nbsp; <a href="index.html" data-i18n="footer_home">Home</a>
+  &nbsp;·&nbsp; <a href="mailto:privacy@tulparavpn.app" data-i18n="footer_contact">Contact</a></p>
+</footer>
+
+<script>
+const i18n = {
+  en: {
+    nav_back: "← Back to Home", badge: "Privacy Policy",
+    hero_title: "Your privacy is our priority",
+    hero_desc: "We built Tulpara VPN with a single promise: we will never log, track, or share your online activity. Ever.",
+    last_updated: "Last updated: January 1, 2025",
+    highlight: "Tulpara VPN operates under a strict No-Log Policy. We do not collect, store, or share your IP address, browsing history, traffic data, DNS queries, or any other personal activity while using our VPN service.",
+    s1_title: "1. Information We Collect",
+    s1_p1: "We collect only the minimum information necessary to provide our service:",
+    s1_l1: "Account information: Email address and password (hashed) when you create an account.",
+    s1_l2: "Payment information: Processed securely by third-party payment providers. We do not store your card details.",
+    s1_l3: "App diagnostics: Anonymous crash reports to improve app stability. This data is never linked to your identity.",
+    s1_p2: "We do not collect: your IP address, browsing history, DNS queries, traffic data, connection timestamps, bandwidth usage, or any other activity data.",
+    s2_title: "2. No-Log Policy",
+    s2_p1: "Tulpara VPN maintains a strict no-log policy. When you connect to our VPN, we do not record:",
+    s2_l1: "Your real IP address or the VPN server IP assigned to you",
+    s2_l2: "Websites you visit or content you access",
+    s2_l3: "DNS queries made through our servers",
+    s2_l4: "Connection or session timestamps",
+    s2_l5: "Bandwidth used per session",
+    s2_l6: "Any form of traffic data or metadata",
+    s2_p2: "This means we have nothing to hand over to any third party, government, or law enforcement agency — because we simply don't have it.",
+    s3_title: "3. How We Use Your Data",
+    s3_p1: "The limited data we collect is used solely for:",
+    s3_l1: "Account management and authentication",
+    s3_l2: "Processing payments and managing subscriptions",
+    s3_l3: "Sending important service-related notifications",
+    s3_l4: "Improving app performance via anonymous diagnostics",
+    s3_l5: "Responding to customer support requests",
+    s3_p2: "We do not sell, rent, or share your personal data with any third parties for marketing or advertising purposes.",
+    s4_title: "4. Cookies & Tracking",
+    s4_p1: "Our website uses minimal cookies strictly necessary for functionality, such as remembering your language preference and session state. We do not use advertising cookies or cross-site tracking technologies.",
+    s4_p2: "The Tulpara VPN mobile application does not use cookies. Anonymous analytics data may be collected to improve the user experience, and this data cannot be used to identify you.",
+    s5_title: "5. Third-Party Services",
+    s5_p1: "We may use trusted third-party services for the following purposes:",
+    s5_l1: "Payment processing: Stripe or Apple/Google Pay for handling transactions securely.",
+    s5_l2: "Crash reporting: Anonymous crash data to fix bugs (no personal data included).",
+    s5_p2: "These providers are bound by their own privacy policies and are prohibited from using your data for any purpose other than providing their service to us.",
+    s6_title: "6. Data Security",
+    s6_p1: "We protect any data we hold with industry-standard security measures including AES-256 encryption, secure HTTPS connections, and strict access controls. Your account password is stored as a hashed value and is never accessible in plain text.",
+    s6_p2: "In the unlikely event of a data breach, we will notify affected users promptly and take all necessary remediation steps in accordance with applicable laws.",
+    s7_title: "7. Your Rights",
+    s7_p1: "Depending on your location, you may have the following rights regarding your personal data:",
+    s7_l1: "Access: Request a copy of the personal data we hold about you.",
+    s7_l2: "Correction: Request correction of inaccurate data.",
+    s7_l3: "Deletion: Request deletion of your account and associated data.",
+    s7_l4: "Portability: Request your data in a portable format.",
+    s7_l5: "Objection: Object to certain processing of your data.",
+    s7_p2: "To exercise any of these rights, contact us at privacy@tulparavpn.app.",
+    s8_title: "8. Children's Privacy",
+    s8_p1: "Tulpara VPN is not intended for use by children under the age of 13. We do not knowingly collect personal data from children. If you believe a child has provided us with personal data, please contact us immediately and we will delete it.",
+    s9_title: "9. Changes to This Policy",
+    s9_p1: "We may update this Privacy Policy from time to time. When we do, we will update the \"Last updated\" date at the top of this page and, where appropriate, notify you via email or in-app notification.",
+    s9_p2: "Continued use of Tulpara VPN after any changes constitutes your acceptance of the updated policy.",
+    s10_title: "10. Contact Us",
+    s10_p1: "If you have any questions, concerns, or requests regarding this Privacy Policy or our data practices, please contact us:",
+    contact_email_label: "Email:", contact_web_label: "Website:",
+    s10_p2: "We will respond to all legitimate requests within 30 days.",
+    footer_rights: "All rights reserved.", footer_home: "Home", footer_contact: "Contact"
+  },
+  tr: {
+    nav_back: "← Ana Sayfaya Dön", badge: "Gizlilik Politikası",
+    hero_title: "Gizliliğiniz bizim önceliğimizdir",
+    hero_desc: "Tulpara VPN'i tek bir sözle inşa ettik: çevrimiçi aktivitelerinizi asla kaydetmeyeceğiz, takip etmeyeceğiz veya paylaşmayacağız. Hiçbir zaman.",
+    last_updated: "Son güncelleme: 1 Ocak 2025",
+    highlight: "Tulpara VPN, katı bir Sıfır Log Politikası ile çalışır. VPN hizmetimizi kullanırken IP adresinizi, tarama geçmişinizi, trafik verilerinizi, DNS sorgularınızı veya başka hiçbir kişisel aktiviteyi toplamıyor, depolamıyor veya paylaşmıyoruz.",
+    s1_title: "1. Topladığımız Bilgiler",
+    s1_p1: "Yalnızca hizmetimizi sunmak için gereken minimum bilgileri topluyoruz:",
+    s1_l1: "Hesap bilgileri: Hesap oluşturduğunuzda e-posta adresiniz ve şifreniz (hash'lenmiş).",
+    s1_l2: "Ödeme bilgileri: Üçüncü taraf ödeme sağlayıcıları tarafından güvenli şekilde işlenir. Kart bilgilerinizi saklamıyoruz.",
+    s1_l3: "Uygulama tanılama: Uygulama kararlılığını geliştirmek için anonim çökme raporları. Bu veriler kimliğinizle hiçbir zaman ilişkilendirilmez.",
+    s1_p2: "Toplamadığımız veriler: IP adresiniz, tarama geçmişiniz, DNS sorguları, trafik verileri, bağlantı zaman damgaları, bant genişliği kullanımı veya başka herhangi bir aktivite verisi.",
+    s2_title: "2. Sıfır Log Politikası",
+    s2_p1: "Tulpara VPN katı bir sıfır log politikası uygular. VPN'e bağlandığınızda şunları kaydetmiyoruz:",
+    s2_l1: "Gerçek IP adresiniz veya size atanan VPN sunucu IP'si",
+    s2_l2: "Ziyaret ettiğiniz web siteleri veya eriştiğiniz içerikler",
+    s2_l3: "Sunucularımız üzerinden yapılan DNS sorguları",
+    s2_l4: "Bağlantı veya oturum zaman damgaları",
+    s2_l5: "Oturum başına kullanılan bant genişliği",
+    s2_l6: "Herhangi bir trafik verisi veya meta veri",
+    s2_p2: "Bu, herhangi bir üçüncü tarafa, hükümete veya kolluk kuvvetine teslim edecek hiçbir şeyimizin olmadığı anlamına gelir — çünkü bu verilere sahip değiliz.",
+    s3_title: "3. Verilerinizi Nasıl Kullanıyoruz",
+    s3_p1: "Topladığımız sınırlı veriler yalnızca şu amaçlarla kullanılır:",
+    s3_l1: "Hesap yönetimi ve kimlik doğrulama",
+    s3_l2: "Ödemelerin işlenmesi ve aboneliklerin yönetimi",
+    s3_l3: "Önemli hizmet bildirimleri gönderme",
+    s3_l4: "Anonim tanılama ile uygulama performansını iyileştirme",
+    s3_l5: "Müşteri destek taleplerine yanıt verme",
+    s3_p2: "Kişisel verilerinizi pazarlama veya reklam amacıyla herhangi bir üçüncü tarafla satmıyor, kiralamıyor veya paylaşmıyoruz.",
+    s4_title: "4. Çerezler ve İzleme",
+    s4_p1: "Web sitemiz, dil tercihinizi ve oturum durumunuzu hatırlamak gibi yalnızca işlevsellik için gerekli minimum çerezleri kullanır. Reklam çerezleri veya siteler arası izleme teknolojileri kullanmıyoruz.",
+    s4_p2: "Tulpara VPN mobil uygulaması çerez kullanmaz. Kullanıcı deneyimini iyileştirmek için anonim analitik veriler toplanabilir ve bu veriler sizi tanımlamak için kullanılamaz.",
+    s5_title: "5. Üçüncü Taraf Hizmetler",
+    s5_p1: "Aşağıdaki amaçlar için güvenilir üçüncü taraf hizmetler kullanabiliriz:",
+    s5_l1: "Ödeme işleme: İşlemleri güvenli şekilde yönetmek için Stripe veya Apple/Google Pay.",
+    s5_l2: "Çökme raporlama: Hataları düzeltmek için anonim çökme verileri (kişisel veri içermez).",
+    s5_p2: "Bu sağlayıcılar kendi gizlilik politikalarına tabidir ve verilerinizi bize hizmet sunmak dışında herhangi bir amaçla kullanmaları yasaktır.",
+    s6_title: "6. Veri Güvenliği",
+    s6_p1: "Sahip olduğumuz verileri AES-256 şifreleme, güvenli HTTPS bağlantıları ve katı erişim kontrolleri dahil endüstri standardı güvenlik önlemleriyle koruyoruz. Hesap şifreniz hash'lenmiş değer olarak saklanır ve düz metin olarak hiçbir zaman erişilemez.",
+    s6_p2: "Olası bir veri ihlali durumunda etkilenen kullanıcıları derhal bilgilendirir ve yürürlükteki yasalara uygun olarak tüm gerekli düzeltici adımları atarız.",
+    s7_title: "7. Haklarınız",
+    s7_p1: "Konumunuza bağlı olarak kişisel verileriniz konusunda aşağıdaki haklara sahip olabilirsiniz:",
+    s7_l1: "Erişim: Hakkınızda tuttuğumuz kişisel verilerin bir kopyasını talep edin.",
+    s7_l2: "Düzeltme: Hatalı verilerin düzeltilmesini talep edin.",
+    s7_l3: "Silme: Hesabınızın ve ilgili verilerin silinmesini talep edin.",
+    s7_l4: "Taşınabilirlik: Verilerinizi taşınabilir bir formatta talep edin.",
+    s7_l5: "İtiraz: Verilerinizin belirli işlemlere itiraz edin.",
+    s7_p2: "Bu haklardan herhangi birini kullanmak için privacy@tulparavpn.app adresinden bize ulaşın.",
+    s8_title: "8. Çocukların Gizliliği",
+    s8_p1: "Tulpara VPN 13 yaşın altındaki çocukların kullanımına yönelik değildir. Çocuklardan bilerek kişisel veri toplamıyoruz. Bir çocuğun bize kişisel veri sağladığını düşünüyorsanız lütfen derhal bizimle iletişime geçin, verileri sileceğiz.",
+    s9_title: "9. Politika Değişiklikleri",
+    s9_p1: "Bu Gizlilik Politikasını zaman zaman güncelleyebiliriz. Bunu yaptığımızda, bu sayfanın üst kısmındaki 'Son güncelleme' tarihini güncelleriz ve uygun olduğunda e-posta veya uygulama içi bildirim yoluyla sizi bilgilendiririz.",
+    s9_p2: "Herhangi bir değişiklikten sonra Tulpara VPN'i kullanmaya devam etmeniz, güncellenmiş politikayı kabul ettiğiniz anlamına gelir.",
+    s10_title: "10. Bize Ulaşın",
+    s10_p1: "Bu Gizlilik Politikası veya veri uygulamalarımız hakkında sorularınız, endişeleriniz veya talepleriniz için lütfen bizimle iletişime geçin:",
+    contact_email_label: "E-posta:", contact_web_label: "Web sitesi:",
+    s10_p2: "Tüm meşru taleplere 30 gün içinde yanıt vereceğiz.",
+    footer_rights: "Tüm hakları saklıdır.", footer_home: "Ana Sayfa", footer_contact: "İletişim"
+  },
+  es: {
+    nav_back: "← Volver al Inicio", badge: "Política de Privacidad",
+    hero_title: "Tu privacidad es nuestra prioridad",
+    hero_desc: "Creamos Tulpara VPN con una única promesa: nunca registraremos, rastrearemos ni compartiremos tu actividad en línea. Jamás.",
+    last_updated: "Última actualización: 1 de enero de 2025",
+    highlight: "Tulpara VPN opera bajo una estricta Política de Cero Registros. No recopilamos, almacenamos ni compartimos tu dirección IP, historial de navegación, datos de tráfico, consultas DNS ni ninguna otra actividad personal mientras usas nuestro servicio VPN.",
+    s1_title: "1. Información que Recopilamos",
+    s1_p1: "Solo recopilamos la información mínima necesaria para proporcionar nuestro servicio:",
+    s1_l1: "Información de cuenta: Dirección de correo electrónico y contraseña (cifrada) al crear una cuenta.",
+    s1_l2: "Información de pago: Procesada de forma segura por proveedores de pago de terceros. No almacenamos los datos de tu tarjeta.",
+    s1_l3: "Diagnóstico de la app: Informes de fallos anónimos para mejorar la estabilidad. Estos datos nunca se vinculan a tu identidad.",
+    s1_p2: "No recopilamos: tu dirección IP, historial de navegación, consultas DNS, datos de tráfico, marcas de tiempo de conexión, uso de ancho de banda ni ningún otro dato de actividad.",
+    s2_title: "2. Política de Cero Registros",
+    s2_p1: "Tulpara VPN mantiene una estricta política de cero registros. Cuando te conectas a nuestra VPN, no registramos:",
+    s2_l1: "Tu dirección IP real o la IP del servidor VPN asignada",
+    s2_l2: "Sitios web que visitas o contenido al que accedes",
+    s2_l3: "Consultas DNS realizadas a través de nuestros servidores",
+    s2_l4: "Marcas de tiempo de conexión o sesión",
+    s2_l5: "Ancho de banda usado por sesión",
+    s2_l6: "Ningún tipo de datos de tráfico o metadatos",
+    s2_p2: "Esto significa que no tenemos nada que entregar a terceros, gobiernos o agencias de aplicación de la ley — porque simplemente no lo tenemos.",
+    s3_title: "3. Cómo Usamos tus Datos",
+    s3_p1: "Los datos limitados que recopilamos se usan exclusivamente para:",
+    s3_l1: "Gestión de cuentas y autenticación",
+    s3_l2: "Procesamiento de pagos y gestión de suscripciones",
+    s3_l3: "Envío de notificaciones importantes relacionadas con el servicio",
+    s3_l4: "Mejora del rendimiento de la app mediante diagnósticos anónimos",
+    s3_l5: "Respuesta a solicitudes de soporte al cliente",
+    s3_p2: "No vendemos, alquilamos ni compartimos tus datos personales con terceros para fines de marketing o publicidad.",
+    s4_title: "4. Cookies y Rastreo",
+    s4_p1: "Nuestro sitio web usa cookies mínimas estrictamente necesarias para la funcionalidad, como recordar tu preferencia de idioma. No usamos cookies publicitarias ni tecnologías de rastreo entre sitios.",
+    s4_p2: "La aplicación móvil de Tulpara VPN no usa cookies. Se pueden recopilar datos analíticos anónimos para mejorar la experiencia del usuario, y estos datos no pueden usarse para identificarte.",
+    s5_title: "5. Servicios de Terceros",
+    s5_p1: "Podemos usar servicios de terceros de confianza para los siguientes propósitos:",
+    s5_l1: "Procesamiento de pagos: Stripe o Apple/Google Pay para gestionar transacciones de forma segura.",
+    s5_l2: "Reporte de fallos: Datos anónimos de fallos para corregir errores (sin datos personales).",
+    s5_p2: "Estos proveedores están sujetos a sus propias políticas de privacidad y tienen prohibido usar tus datos para cualquier propósito que no sea prestarnos su servicio.",
+    s6_title: "6. Seguridad de Datos",
+    s6_p1: "Protegemos los datos que almacenamos con medidas de seguridad estándar de la industria, incluyendo cifrado AES-256, conexiones HTTPS seguras y controles de acceso estrictos. Tu contraseña se almacena como un valor cifrado y nunca es accesible en texto plano.",
+    s6_p2: "En el improbable caso de una brecha de datos, notificaremos a los usuarios afectados de inmediato y tomaremos todas las medidas correctivas necesarias.",
+    s7_title: "7. Tus Derechos",
+    s7_p1: "Dependiendo de tu ubicación, puedes tener los siguientes derechos sobre tus datos personales:",
+    s7_l1: "Acceso: Solicitar una copia de los datos personales que tenemos sobre ti.",
+    s7_l2: "Corrección: Solicitar la corrección de datos inexactos.",
+    s7_l3: "Eliminación: Solicitar la eliminación de tu cuenta y datos asociados.",
+    s7_l4: "Portabilidad: Solicitar tus datos en un formato portátil.",
+    s7_l5: "Objeción: Objetar cierto procesamiento de tus datos.",
+    s7_p2: "Para ejercer cualquiera de estos derechos, contáctanos en privacy@tulparavpn.app.",
+    s8_title: "8. Privacidad de Menores",
+    s8_p1: "Tulpara VPN no está destinado a menores de 13 años. No recopilamos conscientemente datos personales de menores. Si crees que un menor nos ha proporcionado datos personales, contáctanos inmediatamente y los eliminaremos.",
+    s9_title: "9. Cambios en esta Política",
+    s9_p1: "Podemos actualizar esta Política de Privacidad ocasionalmente. Cuando lo hagamos, actualizaremos la fecha de 'Última actualización' y, cuando corresponda, te notificaremos por correo electrónico o notificación en la app.",
+    s9_p2: "El uso continuado de Tulpara VPN tras cualquier cambio constituye tu aceptación de la política actualizada.",
+    s10_title: "10. Contáctanos",
+    s10_p1: "Si tienes preguntas, inquietudes o solicitudes sobre esta Política de Privacidad, contáctanos:",
+    contact_email_label: "Correo:", contact_web_label: "Sitio web:",
+    s10_p2: "Responderemos a todas las solicitudes legítimas en un plazo de 30 días.",
+    footer_rights: "Todos los derechos reservados.", footer_home: "Inicio", footer_contact: "Contacto"
+  },
+  ru: {
+    nav_back: "← На главную", badge: "Политика конфиденциальности",
+    hero_title: "Ваша конфиденциальность — наш приоритет",
+    hero_desc: "Мы создали Tulpara VPN с одним обещанием: мы никогда не будем регистрировать, отслеживать или передавать вашу онлайн-активность. Никогда.",
+    last_updated: "Последнее обновление: 1 января 2025 г.",
+    highlight: "Tulpara VPN работает в соответствии со строгой политикой нулевого журналирования. Мы не собираем, не храним и не передаём ваш IP-адрес, историю посещений, данные трафика, DNS-запросы или любую другую личную активность при использовании нашего VPN-сервиса.",
+    s1_title: "1. Информация, которую мы собираем",
+    s1_p1: "Мы собираем только минимально необходимую информацию для предоставления нашего сервиса:",
+    s1_l1: "Данные аккаунта: адрес электронной почты и пароль (в хэшированном виде) при создании аккаунта.",
+    s1_l2: "Платёжная информация: обрабатывается безопасно сторонними платёжными провайдерами. Мы не храним данные вашей карты.",
+    s1_l3: "Диагностика приложения: анонимные отчёты о сбоях для повышения стабильности. Эти данные никогда не связываются с вашей личностью.",
+    s1_p2: "Мы не собираем: ваш IP-адрес, историю посещений, DNS-запросы, данные трафика, временны́е метки подключений, использование пропускной способности или любые другие данные активности.",
+    s2_title: "2. Политика нулевого журналирования",
+    s2_p1: "Tulpara VPN придерживается строгой политики нулевого журналирования. При подключении к нашему VPN мы не записываем:",
+    s2_l1: "Ваш реальный IP-адрес или IP-адрес назначенного VPN-сервера",
+    s2_l2: "Посещаемые вами сайты или контент, к которому вы получаете доступ",
+    s2_l3: "DNS-запросы, сделанные через наши серверы",
+    s2_l4: "Временны́е метки подключений или сеансов",
+    s2_l5: "Использованную пропускную способность за сеанс",
+    s2_l6: "Любые данные трафика или метаданные",
+    s2_p2: "Это означает, что нам нечего передавать третьим лицам, правительствам или правоохранительным органам — потому что у нас этого просто нет.",
+    s3_title: "3. Как мы используем ваши данные",
+    s3_p1: "Ограниченные данные, которые мы собираем, используются исключительно для:",
+    s3_l1: "Управления аккаунтом и аутентификации",
+    s3_l2: "Обработки платежей и управления подписками",
+    s3_l3: "Отправки важных уведомлений, связанных с сервисом",
+    s3_l4: "Улучшения производительности приложения с помощью анонимной диагностики",
+    s3_l5: "Ответов на запросы в службу поддержки",
+    s3_p2: "Мы не продаём, не сдаём в аренду и не передаём ваши личные данные третьим лицам в маркетинговых или рекламных целях.",
+    s4_title: "4. Файлы cookie и отслеживание",
+    s4_p1: "Наш сайт использует минимальное количество файлов cookie, строго необходимых для функциональности, например для запоминания языковых предпочтений. Мы не используем рекламные файлы cookie или технологии межсайтового отслеживания.",
+    s4_p2: "Мобильное приложение Tulpara VPN не использует файлы cookie. Для улучшения пользовательского опыта могут собираться анонимные аналитические данные, которые нельзя использовать для вашей идентификации.",
+    s5_title: "5. Сторонние сервисы",
+    s5_p1: "Мы можем использовать надёжные сторонние сервисы для следующих целей:",
+    s5_l1: "Обработка платежей: Stripe или Apple/Google Pay для безопасного проведения транзакций.",
+    s5_l2: "Отчёты о сбоях: анонимные данные об ошибках для их исправления (без личных данных).",
+    s5_p2: "Эти провайдеры связаны собственными политиками конфиденциальности и не вправе использовать ваши данные в каких-либо целях, кроме предоставления нам своих услуг.",
+    s6_title: "6. Безопасность данных",
+    s6_p1: "Мы защищаем хранимые данные с помощью отраслевых стандартов безопасности, включая шифрование AES-256, защищённые соединения HTTPS и строгий контроль доступа. Пароль вашего аккаунта хранится в хэшированном виде и никогда не доступен в открытом тексте.",
+    s6_p2: "В маловероятном случае утечки данных мы незамедлительно уведомим затронутых пользователей и примем все необходимые меры в соответствии с действующим законодательством.",
+    s7_title: "7. Ваши права",
+    s7_p1: "В зависимости от вашего местонахождения вы можете иметь следующие права в отношении ваших личных данных:",
+    s7_l1: "Доступ: запросить копию личных данных, которые мы о вас храним.",
+    s7_l2: "Исправление: запросить исправление неточных данных.",
+    s7_l3: "Удаление: запросить удаление вашего аккаунта и связанных данных.",
+    s7_l4: "Переносимость: запросить данные в переносимом формате.",
+    s7_l5: "Возражение: возразить против определённой обработки ваших данных.",
+    s7_p2: "Для реализации любого из этих прав свяжитесь с нами по адресу privacy@tulparavpn.app.",
+    s8_title: "8. Конфиденциальность детей",
+    s8_p1: "Tulpara VPN не предназначен для использования детьми до 13 лет. Мы сознательно не собираем личные данные детей. Если вы считаете, что ребёнок предоставил нам личные данные, немедленно свяжитесь с нами, и мы их удалим.",
+    s9_title: "9. Изменения в политике",
+    s9_p1: "Мы можем периодически обновлять настоящую Политику конфиденциальности. В этом случае мы обновим дату «Последнее обновление» вверху страницы и при необходимости уведомим вас по электронной почте или через уведомление в приложении.",
+    s9_p2: "Продолжение использования Tulpara VPN после любых изменений означает ваше согласие с обновлённой политикой.",
+    s10_title: "10. Свяжитесь с нами",
+    s10_p1: "Если у вас есть вопросы, опасения или запросы относительно настоящей Политики конфиденциальности, свяжитесь с нами:",
+    contact_email_label: "Email:", contact_web_label: "Сайт:",
+    s10_p2: "Мы ответим на все обоснованные запросы в течение 30 дней.",
+    footer_rights: "Все права защищены.", footer_home: "Главная", footer_contact: "Контакты"
+  }
+};
+
+function setLang(lang) {
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    if (i18n[lang]?.[key]) el.textContent = i18n[lang][key];
+  });
+  document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+  document.querySelector(`.lang-btn[onclick="setLang('${lang}')"]`).classList.add('active');
+  document.documentElement.lang = lang;
+}
+</script>
+</body>
+</html>
