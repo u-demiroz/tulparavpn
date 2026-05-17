@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Support — Tulpara VPN</title>
+  <meta name="description" content="Tulpara VPN Support — Get help, find answers, contact us." />
+  <link rel="icon" href="assets/logo.png" type="image/png" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #080810; --bg2: #0e0e1a;
+      --accent: #7c5cfc; --accent2: #a78bfa;
+      --text: #f0f0ff; --text2: #9090b0;
+      --border: rgba(124, 92, 252, 0.2);
+      --card: rgba(255,255,255,0.04);
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1rem 5%;
+      background: rgba(8,8,16,0.92); backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo { display: flex; align-items: center; gap: 0.75rem; text-decoration: none; }
+    .nav-logo img { width: 36px; height: 36px; object-fit: contain; }
+    .nav-logo span { font-size: 1.1rem; font-weight: 700; color: var(--text); letter-spacing: 0.05em; }
+    .nav-logo .vpn-badge {
+      font-size: 0.6rem; font-weight: 600; letter-spacing: 0.12em;
+      color: var(--accent2); border: 1px solid var(--accent);
+      padding: 1px 6px; border-radius: 4px;
+    }
+    .nav-right { display: flex; align-items: center; gap: 1.2rem; }
+    .nav-back { font-size: 0.8rem; color: var(--text2); text-decoration: none; transition: color 0.2s; }
+    .nav-back:hover { color: var(--accent2); }
+    .lang-switcher { display: flex; gap: 0.4rem; }
+    .lang-btn {
+      background: none; border: 1px solid transparent; color: var(--text2);
+      padding: 0.3rem 0.65rem; border-radius: 6px; cursor: pointer;
+      font-size: 0.78rem; font-weight: 500; transition: all 0.2s;
+    }
+    .lang-btn:hover { color: var(--text); border-color: var(--border); }
+    .lang-btn.active { color: var(--accent2); border-color: var(--accent); background: rgba(124,92,252,0.1); }
+
+    /* HERO */
+    .page-hero {
+      padding: 8rem 5% 3rem; max-width: 860px;
+      margin: 0 auto; text-align: center;
+    }
+    .hero-badge {
+      display: inline-block; font-size: 0.72rem; font-weight: 600;
+      letter-spacing: 0.15em; text-transform: uppercase;
+      color: var(--accent2); border: 1px solid var(--accent);
+      border-radius: 20px; padding: 0.35rem 1rem; margin-bottom: 1.25rem;
+    }
+    .page-hero h1 { font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 800; margin-bottom: 0.75rem; }
+    .page-hero p { color: var(--text2); font-size: 0.95rem; line-height: 1.7; max-width: 520px; margin: 0 auto; }
+
+    /* CONTENT */
+    .content { max-width: 860px; margin: 0 auto; padding: 2rem 5% 6rem; }
+
+    /* CONTACT CARD */
+    .contact-card {
+      background: linear-gradient(135deg, rgba(124,92,252,0.15), rgba(167,139,250,0.08));
+      border: 1px solid rgba(124,92,252,0.4);
+      border-radius: 20px; padding: 2.5rem; text-align: center;
+      margin-bottom: 2rem;
+    }
+    .contact-card .icon { font-size: 2.5rem; margin-bottom: 1rem; }
+    .contact-card h2 { font-size: 1.3rem; font-weight: 700; margin-bottom: 0.5rem; }
+    .contact-card p { color: var(--text2); font-size: 0.9rem; margin-bottom: 1.5rem; line-height: 1.6; }
+    .btn-email {
+      display: inline-block; background: var(--accent); color: #fff;
+      padding: 0.85rem 2rem; border-radius: 12px; text-decoration: none;
+      font-size: 0.9rem; font-weight: 600; transition: all 0.25s;
+      box-shadow: 0 0 30px rgba(124,92,252,0.3);
+    }
+    .btn-email:hover { background: #9272fd; transform: translateY(-2px); }
+
+    /* FAQ */
+    .faq-title {
+      font-size: 1.1rem; font-weight: 700; margin-bottom: 1rem;
+      color: var(--accent2); letter-spacing: 0.05em;
+    }
+    .faq-item {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 14px; margin-bottom: 0.75rem; overflow: hidden;
+      transition: border-color 0.2s;
+    }
+    .faq-item:hover { border-color: rgba(124,92,252,0.4); }
+    .faq-q {
+      width: 100%; background: none; border: none; color: var(--text);
+      padding: 1.2rem 1.5rem; text-align: left;
+      font-size: 0.9rem; font-weight: 600; cursor: pointer;
+      display: flex; justify-content: space-between; align-items: center;
+      gap: 1rem;
+    }
+    .faq-q .arrow {
+      color: var(--accent2); font-size: 1rem; flex-shrink: 0;
+      transition: transform 0.25s;
+    }
+    .faq-item.open .arrow { transform: rotate(180deg); }
+    .faq-a {
+      display: none; padding: 0 1.5rem 1.2rem;
+      font-size: 0.875rem; color: var(--text2); line-height: 1.75;
+      border-top: 1px solid var(--border);
+      padding-top: 1rem;
+    }
+    .faq-item.open .faq-a { display: block; }
+
+    /* FOOTER */
+    footer { border-top: 1px solid var(--border); padding: 2rem 5%; text-align: center; color: var(--text2); font-size: 0.8rem; }
+    footer a { color: var(--accent2); text-decoration: none; }
+
+    @media (max-width: 600px) {
+      .nav-back { display: none; }
+      .contact-card { padding: 1.75rem 1.25rem; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="index.html">
+    <img src="assets/logo.png" alt="Tulpara" />
+    <span>TULPARA</span>
+    <span class="vpn-badge">VPN</span>
+  </a>
+  <div class="nav-right">
+    <a class="nav-back" href="index.html" data-i18n="nav_back">← Back to Home</a>
+    <div class="lang-switcher">
+      <button class="lang-btn active" onclick="setLang('en')">EN</button>
+      <button class="lang-btn" onclick="setLang('tr')">TR</button>
+      <button class="lang-btn" onclick="setLang('es')">ES</button>
+      <button class="lang-btn" onclick="setLang('ru')">RU</button>
+    </div>
+  </div>
+</nav>
+
+<div class="page-hero">
+  <div class="hero-badge" data-i18n="badge">Support</div>
+  <h1 data-i18n="hero_title">How can we help?</h1>
+  <p data-i18n="hero_desc">Browse the FAQ below or reach out directly — we're here for you.</p>
+</div>
+
+<div class="content">
+
+  <!-- Contact -->
+  <div class="contact-card">
+    <div class="icon">✉️</div>
+    <h2 data-i18n="contact_title">Contact Support</h2>
+    <p data-i18n="contact_desc">Can't find your answer below? Send us an email and we'll get back to you within 24 hours.</p>
+    <a href="mailto:support@tulparavpn.app" class="btn-email">support@tulparavpn.app</a>
+  </div>
+
+  <!-- FAQ -->
+  <p class="faq-title" data-i18n="faq_title">— FREQUENTLY ASKED QUESTIONS</p>
+
+  <div class="faq-item">
+    <button class="faq-q" onclick="toggle(this)">
+      <span data-i18n="q1">How do I connect to Tulpara VPN?</span>
+      <span class="arrow">▾</span>
+    </button>
+    <div class="faq-a" data-i18n="a1">Open the app, tap the large connect button on the home screen. The app will automatically select the fastest server for you. You can also manually choose a server from the server list.</div>
+  </div>
+
+  <div class="faq-item">
+    <button class="faq-q" onclick="toggle(this)">
+      <span data-i18n="q2">Does Tulpara VPN keep logs of my activity?</span>
+      <span class="arrow">▾</span>
+    </button>
+    <div class="faq-a" data-i18n="a2">No. We have a strict no-log policy. We never record your IP address, browsing history, DNS queries, connection timestamps, or any other activity data. Your privacy is fully protected.</div>
+  </div>
+
+  <div class="faq-item">
+    <button class="faq-q" onclick="toggle(this)">
+      <span data-i18n="q3">Why is my connection slow?</span>
+      <span class="arrow">▾</span>
+    </button>
+    <div class="faq-a" data-i18n="a3">Try switching to a server closer to your location. Go to the server list and select a country nearby. Also check that you have a stable internet connection before connecting to the VPN.</div>
+  </div>
+
+  <div class="faq-item">
+    <button class="faq-q" onclick="toggle(this)">
+      <span data-i18n="q4">How do I cancel my subscription?</span>
+      <span class="arrow">▾</span>
+    </button>
+    <div class="faq-a" data-i18n="a4">Subscriptions are managed through the App Store (iOS) or Google Play (Android). Go to your device's subscription settings and cancel from there. You'll continue to have access until the end of your billing period.</div>
+  </div>
+
+  <div class="faq-item">
+    <button class="faq-q" onclick="toggle(this)">
+      <span data-i18n="q5">The app won't connect — what should I do?</span>
+      <span class="arrow">▾</span>
+    </button>
+    <div class="faq-a" data-i18n="a5">Try these steps: 1) Force-close and reopen the app. 2) Switch to a different server. 3) Toggle your device's Wi-Fi or mobile data off and on. 4) Restart your device. If the issue persists, contact us at support@tulparavpn.app.</div>
+  </div>
+
+  <div class="faq-item">
+    <button class="faq-q" onclick="toggle(this)">
+      <span data-i18n="q6">How do I delete my account?</span>
+      <span class="arrow">▾</span>
+    </button>
+    <div class="faq-a" data-i18n="a6">To delete your account and all associated data, email us at support@tulparavpn.app with the subject "Account Deletion Request". We will process your request within 7 business days.</div>
+  </div>
+
+  <div class="faq-item">
+    <button class="faq-q" onclick="toggle(this)">
+      <span data-i18n="q7">Which devices are supported?</span>
+      <span class="arrow">▾</span>
+    </button>
+    <div class="faq-a" data-i18n="a7">Tulpara VPN is available for iOS (iPhone & iPad) and Android devices. Requires iOS 14.0 or later, or Android 8.0 or later.</div>
+  </div>
+
+</div>
+
+<footer>
+  <p>© 2025 Tulpara VPN. <span data-i18n="footer_rights">All rights reserved.</span>
+  &nbsp;·&nbsp; <a href="index.html" data-i18n="footer_home">Home</a>
+  &nbsp;·&nbsp; <a href="privacy-policy.html" data-i18n="footer_privacy">Privacy Policy</a>
+  &nbsp;·&nbsp; <a href="mailto:support@tulparavpn.app" data-i18n="footer_contact">Contact</a></p>
+</footer>
+
+<script>
+function toggle(btn) {
+  const item = btn.closest('.faq-item');
+  item.classList.toggle('open');
+}
+
+const i18n = {
+  en: {
+    nav_back: "← Back to Home", badge: "Support",
+    hero_title: "How can we help?",
+    hero_desc: "Browse the FAQ below or reach out directly — we're here for you.",
+    contact_title: "Contact Support",
+    contact_desc: "Can't find your answer below? Send us an email and we'll get back to you within 24 hours.",
+    faq_title: "— FREQUENTLY ASKED QUESTIONS",
+    q1: "How do I connect to Tulpara VPN?",
+    a1: "Open the app, tap the large connect button on the home screen. The app will automatically select the fastest server for you. You can also manually choose a server from the server list.",
+    q2: "Does Tulpara VPN keep logs of my activity?",
+    a2: "No. We have a strict no-log policy. We never record your IP address, browsing history, DNS queries, connection timestamps, or any other activity data. Your privacy is fully protected.",
+    q3: "Why is my connection slow?",
+    a3: "Try switching to a server closer to your location. Go to the server list and select a country nearby. Also check that you have a stable internet connection before connecting to the VPN.",
+    q4: "How do I cancel my subscription?",
+    a4: "Subscriptions are managed through the App Store (iOS) or Google Play (Android). Go to your device's subscription settings and cancel from there. You'll continue to have access until the end of your billing period.",
+    q5: "The app won't connect — what should I do?",
+    a5: "Try these steps: 1) Force-close and reopen the app. 2) Switch to a different server. 3) Toggle your device's Wi-Fi or mobile data off and on. 4) Restart your device. If the issue persists, contact us at support@tulparavpn.app.",
+    q6: "How do I delete my account?",
+    a6: "To delete your account and all associated data, email us at support@tulparavpn.app with the subject \"Account Deletion Request\". We will process your request within 7 business days.",
+    q7: "Which devices are supported?",
+    a7: "Tulpara VPN is available for iOS (iPhone & iPad) and Android devices. Requires iOS 14.0 or later, or Android 8.0 or later.",
+    footer_rights: "All rights reserved.", footer_home: "Home", footer_privacy: "Privacy Policy", footer_contact: "Contact"
+  },
+  tr: {
+    nav_back: "← Ana Sayfaya Dön", badge: "Destek",
+    hero_title: "Size nasıl yardımcı olabiliriz?",
+    hero_desc: "Aşağıdaki SSS'ye göz atın veya doğrudan bize ulaşın — buradayız.",
+    contact_title: "Destek ile İletişime Geçin",
+    contact_desc: "Cevabınızı bulamadınız mı? Bize e-posta gönderin, 24 saat içinde yanıt verelim.",
+    faq_title: "— SIKÇA SORULAN SORULAR",
+    q1: "Tulpara VPN'e nasıl bağlanırım?",
+    a1: "Uygulamayı açın, ana ekrandaki büyük bağlan butonuna dokunun. Uygulama en hızlı sunucuyu otomatik olarak seçer. Sunucu listesinden manuel olarak da seçim yapabilirsiniz.",
+    q2: "Tulpara VPN aktivitelerimi kaydediyor mu?",
+    a2: "Hayır. Sıkı bir sıfır log politikamız var. IP adresinizi, tarama geçmişinizi, DNS sorgularınızı, bağlantı zaman damgalarınızı veya başka herhangi bir aktivite verisini asla kaydetmiyoruz. Gizliliğiniz tamamen korunmaktadır.",
+    q3: "Bağlantım neden yavaş?",
+    a3: "Konumunuza daha yakın bir sunucuya geçmeyi deneyin. Sunucu listesine gidip yakın bir ülke seçin. Ayrıca VPN'e bağlanmadan önce internet bağlantınızın stabil olduğundan emin olun.",
+    q4: "Aboneliğimi nasıl iptal ederim?",
+    a4: "Abonelikler App Store (iOS) veya Google Play (Android) üzerinden yönetilir. Cihazınızın abonelik ayarlarına gidip oradan iptal edin. Fatura döneminin sonuna kadar erişiminiz devam eder.",
+    q5: "Uygulama bağlanamıyor — ne yapmalıyım?",
+    a5: "Şu adımları deneyin: 1) Uygulamayı zorla kapatıp yeniden açın. 2) Farklı bir sunucuya geçin. 3) Wi-Fi veya mobil veriyi kapatıp açın. 4) Cihazınızı yeniden başlatın. Sorun devam ederse support@tulparavpn.app adresinden bize yazın.",
+    q6: "Hesabımı nasıl silerim?",
+    a6: "Hesabınızı ve tüm verilerinizi silmek için support@tulparavpn.app adresine 'Hesap Silme Talebi' konusuyla e-posta gönderin. Talebinizi 7 iş günü içinde işleme alacağız.",
+    q7: "Hangi cihazlar destekleniyor?",
+    a7: "Tulpara VPN, iOS (iPhone ve iPad) ve Android cihazlarda kullanılabilir. iOS 14.0 veya üzeri, Android 8.0 veya üzeri gerektirir.",
+    footer_rights: "Tüm hakları saklıdır.", footer_home: "Ana Sayfa", footer_privacy: "Gizlilik Politikası", footer_contact: "İletişim"
+  },
+  es: {
+    nav_back: "← Volver al Inicio", badge: "Soporte",
+    hero_title: "¿Cómo podemos ayudarte?",
+    hero_desc: "Consulta las preguntas frecuentes o contáctanos directamente — estamos aquí para ti.",
+    contact_title: "Contactar con Soporte",
+    contact_desc: "¿No encuentras tu respuesta? Envíanos un correo y te responderemos en 24 horas.",
+    faq_title: "— PREGUNTAS FRECUENTES",
+    q1: "¿Cómo me conecto a Tulpara VPN?",
+    a1: "Abre la app y toca el botón grande de conexión en la pantalla principal. La app seleccionará automáticamente el servidor más rápido. También puedes elegir manualmente desde la lista de servidores.",
+    q2: "¿Tulpara VPN guarda registros de mi actividad?",
+    a2: "No. Tenemos una estricta política de cero registros. Nunca grabamos tu dirección IP, historial de navegación, consultas DNS, marcas de tiempo de conexión ni ningún otro dato de actividad. Tu privacidad está completamente protegida.",
+    q3: "¿Por qué mi conexión es lenta?",
+    a3: "Intenta cambiar a un servidor más cercano a tu ubicación. Ve a la lista de servidores y selecciona un país cercano. También verifica que tengas una conexión a internet estable antes de conectarte.",
+    q4: "¿Cómo cancelo mi suscripción?",
+    a4: "Las suscripciones se gestionan desde App Store (iOS) o Google Play (Android). Ve a la configuración de suscripciones de tu dispositivo y cancela desde allí. Tendrás acceso hasta el final de tu período de facturación.",
+    q5: "La app no se conecta — ¿qué hago?",
+    a5: "Prueba estos pasos: 1) Cierra y vuelve a abrir la app. 2) Cambia a otro servidor. 3) Desactiva y reactiva el Wi-Fi o datos móviles. 4) Reinicia tu dispositivo. Si persiste, escríbenos a support@tulparavpn.app.",
+    q6: "¿Cómo elimino mi cuenta?",
+    a6: "Para eliminar tu cuenta y todos tus datos, escríbenos a support@tulparavpn.app con el asunto \"Solicitud de eliminación de cuenta\". Procesaremos tu solicitud en 7 días hábiles.",
+    q7: "¿Qué dispositivos son compatibles?",
+    a7: "Tulpara VPN está disponible para iOS (iPhone y iPad) y Android. Requiere iOS 14.0 o posterior, o Android 8.0 o posterior.",
+    footer_rights: "Todos los derechos reservados.", footer_home: "Inicio", footer_privacy: "Política de Privacidad", footer_contact: "Contacto"
+  },
+  ru: {
+    nav_back: "← На главную", badge: "Поддержка",
+    hero_title: "Чем мы можем помочь?",
+    hero_desc: "Посмотрите ответы на частые вопросы или напишите нам напрямую — мы всегда здесь.",
+    contact_title: "Связаться с поддержкой",
+    contact_desc: "Не нашли ответ? Напишите нам на почту — ответим в течение 24 часов.",
+    faq_title: "— ЧАСТО ЗАДАВАЕМЫЕ ВОПРОСЫ",
+    q1: "Как подключиться к Tulpara VPN?",
+    a1: "Откройте приложение и нажмите большую кнопку подключения на главном экране. Приложение автоматически выберет самый быстрый сервер. Вы также можете выбрать сервер вручную из списка.",
+    q2: "Ведёт ли Tulpara VPN журналы моей активности?",
+    a2: "Нет. Мы придерживаемся строгой политики нулевого журналирования. Мы никогда не записываем ваш IP-адрес, историю посещений, DNS-запросы, временны́е метки подключений или любые другие данные активности. Ваша конфиденциальность полностью защищена.",
+    q3: "Почему соединение медленное?",
+    a3: "Попробуйте переключиться на сервер, расположенный ближе к вам. Откройте список серверов и выберите ближайшую страну. Также убедитесь, что у вас стабильное интернет-соединение перед подключением к VPN.",
+    q4: "Как отменить подписку?",
+    a4: "Подписки управляются через App Store (iOS) или Google Play (Android). Зайдите в настройки подписок на вашем устройстве и отмените там. Доступ сохранится до конца оплаченного периода.",
+    q5: "Приложение не подключается — что делать?",
+    a5: "Попробуйте следующее: 1) Принудительно закройте и снова откройте приложение. 2) Переключитесь на другой сервер. 3) Отключите и включите Wi-Fi или мобильные данные. 4) Перезагрузите устройство. Если проблема не исчезнет, напишите нам на support@tulparavpn.app.",
+    q6: "Как удалить аккаунт?",
+    a6: "Для удаления аккаунта и всех связанных данных напишите на support@tulparavpn.app с темой «Запрос на удаление аккаунта». Мы обработаем запрос в течение 7 рабочих дней.",
+    q7: "Какие устройства поддерживаются?",
+    a7: "Tulpara VPN доступен для iOS (iPhone и iPad) и Android. Требуется iOS 14.0 или новее, или Android 8.0 или новее.",
+    footer_rights: "Все права защищены.", footer_home: "Главная", footer_privacy: "Политика конфиденциальности", footer_contact: "Контакты"
+  }
+};
+
+function setLang(lang) {
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    if (i18n[lang]?.[key]) el.textContent = i18n[lang][key];
+  });
+  document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+  document.querySelector(`.lang-btn[onclick="setLang('${lang}')"]`).classList.add('active');
+  document.documentElement.lang = lang;
+}
+</script>
+</body>
+</html>
