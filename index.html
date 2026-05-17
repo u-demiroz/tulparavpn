@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tulpara VPN</title>
+  <meta name="description" content="Tulpara VPN — Fast, secure and private internet access for everyone." />
+  <link rel="icon" href="assets/logo.png" type="image/png" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #080810;
+      --bg2: #0e0e1a;
+      --bg3: #13131f;
+      --accent: #7c5cfc;
+      --accent2: #a78bfa;
+      --accent-glow: rgba(124, 92, 252, 0.3);
+      --text: #f0f0ff;
+      --text2: #9090b0;
+      --border: rgba(124, 92, 252, 0.2);
+      --card: rgba(255,255,255,0.04);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1rem 5%;
+      background: rgba(8, 8, 16, 0.85);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo {
+      display: flex; align-items: center; gap: 0.75rem; text-decoration: none;
+    }
+    .nav-logo img { width: 38px; height: 38px; object-fit: contain; }
+    .nav-logo span { font-size: 1.2rem; font-weight: 700; color: var(--text); letter-spacing: 0.05em; }
+    .nav-logo .vpn-badge {
+      font-size: 0.6rem; font-weight: 600; letter-spacing: 0.12em;
+      color: var(--accent2); border: 1px solid var(--accent);
+      padding: 1px 6px; border-radius: 4px; align-self: center;
+    }
+
+    .lang-switcher {
+      display: flex; gap: 0.4rem; align-items: center;
+    }
+    .lang-btn {
+      background: none; border: 1px solid transparent;
+      color: var(--text2); padding: 0.3rem 0.65rem;
+      border-radius: 6px; cursor: pointer;
+      font-size: 0.78rem; font-weight: 500;
+      transition: all 0.2s;
+    }
+    .lang-btn:hover { color: var(--text); border-color: var(--border); }
+    .lang-btn.active {
+      color: var(--accent2); border-color: var(--accent);
+      background: rgba(124, 92, 252, 0.1);
+    }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      text-align: center;
+      padding: 7rem 5% 4rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute; top: -20%; left: 50%; transform: translateX(-50%);
+      width: 700px; height: 700px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(124,92,252,0.12) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-logo-wrap {
+      position: relative; display: inline-block; margin-bottom: 2rem;
+    }
+    .hero-logo-wrap img {
+      width: 130px; height: 130px;
+      object-fit: contain;
+      filter: drop-shadow(0 0 30px rgba(124,92,252,0.5));
+      animation: float 6s ease-in-out infinite;
+    }
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    .hero h1 {
+      font-size: clamp(2.4rem, 6vw, 4.5rem);
+      font-weight: 800; line-height: 1.1;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.5rem;
+    }
+    .hero h1 .brand { color: var(--accent2); }
+
+    .hero-tagline {
+      font-size: clamp(1rem, 2.5vw, 1.35rem);
+      color: var(--text2); font-weight: 400;
+      max-width: 560px; line-height: 1.6;
+      margin: 1rem auto 2.5rem;
+    }
+
+    .cta-group {
+      display: flex; flex-wrap: wrap; gap: 1rem;
+      justify-content: center; margin-bottom: 3rem;
+    }
+
+    .btn-store {
+      display: flex; align-items: center; gap: 0.75rem;
+      padding: 0.85rem 1.6rem; border-radius: 12px;
+      text-decoration: none; font-size: 0.9rem; font-weight: 600;
+      transition: all 0.25s; cursor: pointer; border: none;
+    }
+    .btn-store.primary {
+      background: var(--accent);
+      color: #fff;
+      box-shadow: 0 0 30px var(--accent-glow);
+    }
+    .btn-store.primary:hover {
+      background: #9272fd;
+      box-shadow: 0 0 45px var(--accent-glow);
+      transform: translateY(-2px);
+    }
+    .btn-store.secondary {
+      background: var(--card);
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+    .btn-store.secondary:hover {
+      background: rgba(124,92,252,0.1);
+      border-color: var(--accent);
+      transform: translateY(-2px);
+    }
+    .btn-store svg { width: 22px; height: 22px; flex-shrink: 0; }
+    .btn-store-text { text-align: left; }
+    .btn-store-text small { display: block; font-size: 0.65rem; font-weight: 400; opacity: 0.7; }
+
+    .hero-stats {
+      display: flex; gap: 3rem; justify-content: center; flex-wrap: wrap;
+      margin-top: 1rem;
+    }
+    .stat { text-align: center; }
+    .stat-num { font-size: 1.8rem; font-weight: 800; color: var(--accent2); }
+    .stat-label { font-size: 0.75rem; color: var(--text2); margin-top: 0.2rem; }
+
+    /* ── FEATURES ── */
+    .section { padding: 5rem 5%; max-width: 1100px; margin: 0 auto; }
+    .section-label {
+      text-align: center;
+      font-size: 0.75rem; font-weight: 600; letter-spacing: 0.15em;
+      color: var(--accent2); text-transform: uppercase; margin-bottom: 0.75rem;
+    }
+    .section-title {
+      text-align: center;
+      font-size: clamp(1.6rem, 4vw, 2.4rem);
+      font-weight: 800; margin-bottom: 0.75rem;
+    }
+    .section-sub {
+      text-align: center; color: var(--text2);
+      font-size: 1rem; max-width: 500px; margin: 0 auto 3rem; line-height: 1.6;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .feature-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px; padding: 1.75rem;
+      transition: all 0.25s;
+    }
+    .feature-card:hover {
+      border-color: var(--accent);
+      background: rgba(124,92,252,0.07);
+      transform: translateY(-4px);
+    }
+    .feature-icon {
+      width: 48px; height: 48px; border-radius: 12px;
+      background: rgba(124,92,252,0.15);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.5rem; margin-bottom: 1.1rem;
+    }
+    .feature-card h3 { font-size: 1rem; font-weight: 700; margin-bottom: 0.5rem; }
+    .feature-card p { font-size: 0.875rem; color: var(--text2); line-height: 1.6; }
+
+    /* ── HOW IT WORKS ── */
+    .how-section {
+      padding: 5rem 5%;
+      background: var(--bg2);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+    .steps {
+      display: flex; flex-wrap: wrap; gap: 1rem;
+      justify-content: center; max-width: 900px; margin: 0 auto;
+    }
+    .step {
+      flex: 1; min-width: 200px; max-width: 260px;
+      text-align: center; padding: 1.5rem 1rem;
+    }
+    .step-num {
+      width: 52px; height: 52px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent), #c084fc);
+      color: #fff; font-size: 1.2rem; font-weight: 800;
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 1rem;
+    }
+    .step h3 { font-size: 0.95rem; font-weight: 700; margin-bottom: 0.4rem; }
+    .step p { font-size: 0.82rem; color: var(--text2); line-height: 1.5; }
+
+    /* ── DOWNLOAD SECTION ── */
+    .download-section {
+      padding: 6rem 5%; text-align: center;
+      max-width: 700px; margin: 0 auto;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 2rem 5%; text-align: center;
+      color: var(--text2); font-size: 0.8rem;
+    }
+    footer a { color: var(--accent2); text-decoration: none; }
+
+    /* ── DIVIDER ── */
+    .divider {
+      height: 1px; background: var(--border);
+      margin: 0 5%;
+    }
+
+    @media (max-width: 600px) {
+      .hero-stats { gap: 1.5rem; }
+      .cta-group { flex-direction: column; align-items: center; }
+      .steps { flex-direction: column; align-items: center; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#">
+    <img src="assets/logo.png" alt="Tulpara" />
+    <span>TULPARA</span>
+    <span class="vpn-badge">VPN</span>
+  </a>
+  <div class="lang-switcher">
+    <button class="lang-btn active" onclick="setLang('en')">EN</button>
+    <button class="lang-btn" onclick="setLang('tr')">TR</button>
+    <button class="lang-btn" onclick="setLang('es')">ES</button>
+    <button class="lang-btn" onclick="setLang('ru')">RU</button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-logo-wrap">
+    <img src="assets/logo.png" alt="Tulpara VPN" />
+  </div>
+  <h1><span class="brand">Tulpara</span> VPN</h1>
+  <p class="hero-tagline" data-i18n="hero_tagline">
+    Fast, private and secure internet access. Run free on the internet — no limits, no logs.
+  </p>
+  <div class="cta-group">
+    <a href="#" class="btn-store primary">
+      <!-- Apple icon -->
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+      <div class="btn-store-text">
+        <small data-i18n="download_on">Download on the</small>
+        App Store
+      </div>
+    </a>
+    <a href="#" class="btn-store secondary">
+      <!-- Google Play icon -->
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M3.18 23.76c.37.21.8.22 1.19.04l12.64-7.29-2.79-2.79-11.04 10.04zM.51 1.77C.19 2.1 0 2.64 0 3.34v17.32c0 .7.19 1.24.51 1.57l.08.08 9.7-9.7v-.22L.59 1.69l-.08.08zM19.37 10.07l-2.65-1.53-3.03 3.03 3.03 3.03 2.66-1.54c.76-.44.76-1.55-.01-1.99zM4.37.24L17.01 7.53l-2.79 2.79L3.18.28C3.57.1 4 .12 4.37.24z"/></svg>
+      <div class="btn-store-text">
+        <small data-i18n="get_it_on">Get it on</small>
+        Google Play
+      </div>
+    </a>
+  </div>
+  <div class="hero-stats">
+    <div class="stat">
+      <div class="stat-num">100+</div>
+      <div class="stat-label" data-i18n="stat_servers">Servers</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">50+</div>
+      <div class="stat-label" data-i18n="stat_countries">Countries</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">0</div>
+      <div class="stat-label" data-i18n="stat_logs">Log Policy</div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- FEATURES -->
+<div style="background: var(--bg);">
+  <div class="section">
+    <p class="section-label" data-i18n="features_label">Why Tulpara</p>
+    <h2 class="section-title" data-i18n="features_title">Everything you need to stay private</h2>
+    <p class="section-sub" data-i18n="features_sub">Military-grade encryption, blazing fast speeds, and a strict no-log policy.</p>
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon">🔒</div>
+        <h3 data-i18n="f1_title">AES-256 Encryption</h3>
+        <p data-i18n="f1_desc">Bank-level encryption protects all your traffic, keeping hackers and snoopers out.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">⚡</div>
+        <h3 data-i18n="f2_title">Lightning Fast</h3>
+        <p data-i18n="f2_desc">Optimized servers for maximum speed. Stream, game, and browse without slowdowns.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">👁️</div>
+        <h3 data-i18n="f3_title">Zero Logs</h3>
+        <p data-i18n="f3_desc">We never track, store or share your online activity. Your privacy is guaranteed.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🌍</div>
+        <h3 data-i18n="f4_title">Global Servers</h3>
+        <p data-i18n="f4_desc">Connect to 100+ servers in 50+ countries. Access any content from anywhere.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">📱</div>
+        <h3 data-i18n="f5_title">All Devices</h3>
+        <p data-i18n="f5_desc">iOS, Android and more. One account protects all your devices simultaneously.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🛡️</div>
+        <h3 data-i18n="f6_title">Kill Switch</h3>
+        <p data-i18n="f6_desc">Automatically cuts your internet if the VPN drops, ensuring you're never exposed.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- HOW IT WORKS -->
+<div class="how-section">
+  <div style="max-width: 1100px; margin: 0 auto;">
+    <p class="section-label" data-i18n="how_label">How It Works</p>
+    <h2 class="section-title" data-i18n="how_title">Up and running in seconds</h2>
+    <p class="section-sub" data-i18n="how_sub">No technical knowledge needed. Three simple steps.</p>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <h3 data-i18n="step1_title">Download</h3>
+        <p data-i18n="step1_desc">Get Tulpara VPN from the App Store or Google Play for free.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <h3 data-i18n="step2_title">Connect</h3>
+        <p data-i18n="step2_desc">Tap once to connect to the fastest server near you.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <h3 data-i18n="step3_title">Browse Free</h3>
+        <p data-i18n="step3_desc">Enjoy a fast, private and unrestricted internet experience.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- DOWNLOAD CTA -->
+<div style="background: var(--bg);">
+  <div class="download-section">
+    <p class="section-label" data-i18n="download_label">Get Started</p>
+    <h2 class="section-title" data-i18n="download_title">Your freedom starts here</h2>
+    <p class="section-sub" data-i18n="download_sub">Available on iOS and Android. Download now for free.</p>
+    <div class="cta-group">
+      <a href="#" class="btn-store primary">
+        <svg viewBox="0 0 24 24" fill="currentColor" style="width:22px;height:22px"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+        <div class="btn-store-text"><small data-i18n="download_on">Download on the</small> App Store</div>
+      </a>
+      <a href="#" class="btn-store secondary">
+        <svg viewBox="0 0 24 24" fill="currentColor" style="width:22px;height:22px"><path d="M3.18 23.76c.37.21.8.22 1.19.04l12.64-7.29-2.79-2.79-11.04 10.04zM.51 1.77C.19 2.1 0 2.64 0 3.34v17.32c0 .7.19 1.24.51 1.57l.08.08 9.7-9.7v-.22L.59 1.69l-.08.08zM19.37 10.07l-2.65-1.53-3.03 3.03 3.03 3.03 2.66-1.54c.76-.44.76-1.55-.01-1.99zM4.37.24L17.01 7.53l-2.79 2.79L3.18.28C3.57.1 4 .12 4.37.24z"/></svg>
+        <div class="btn-store-text"><small data-i18n="get_it_on">Get it on</small> Google Play</div>
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2024 Tulpara VPN. <span data-i18n="footer_rights">All rights reserved.</span>
+  &nbsp;·&nbsp; <a href="#" data-i18n="footer_privacy">Privacy Policy</a>
+  &nbsp;·&nbsp; <a href="#" data-i18n="footer_terms">Terms of Service</a></p>
+</footer>
+
+<script>
+const i18n = {
+  en: {
+    hero_tagline: "Fast, private and secure internet access. Run free on the internet — no limits, no logs.",
+    download_on: "Download on the", get_it_on: "Get it on",
+    stat_servers: "Servers", stat_countries: "Countries", stat_logs: "Log Policy",
+    features_label: "Why Tulpara", features_title: "Everything you need to stay private",
+    features_sub: "Military-grade encryption, blazing fast speeds, and a strict no-log policy.",
+    f1_title: "AES-256 Encryption", f1_desc: "Bank-level encryption protects all your traffic, keeping hackers and snoopers out.",
+    f2_title: "Lightning Fast", f2_desc: "Optimized servers for maximum speed. Stream, game, and browse without slowdowns.",
+    f3_title: "Zero Logs", f3_desc: "We never track, store or share your online activity. Your privacy is guaranteed.",
+    f4_title: "Global Servers", f4_desc: "Connect to 100+ servers in 50+ countries. Access any content from anywhere.",
+    f5_title: "All Devices", f5_desc: "iOS, Android and more. One account protects all your devices simultaneously.",
+    f6_title: "Kill Switch", f6_desc: "Automatically cuts your internet if the VPN drops, ensuring you're never exposed.",
+    how_label: "How It Works", how_title: "Up and running in seconds", how_sub: "No technical knowledge needed. Three simple steps.",
+    step1_title: "Download", step1_desc: "Get Tulpara VPN from the App Store or Google Play for free.",
+    step2_title: "Connect", step2_desc: "Tap once to connect to the fastest server near you.",
+    step3_title: "Browse Free", step3_desc: "Enjoy a fast, private and unrestricted internet experience.",
+    download_label: "Get Started", download_title: "Your freedom starts here", download_sub: "Available on iOS and Android. Download now for free.",
+    footer_rights: "All rights reserved.", footer_privacy: "Privacy Policy", footer_terms: "Terms of Service"
+  },
+  tr: {
+    hero_tagline: "Hızlı, özel ve güvenli internet erişimi. İnternette özgürce gezin — limit yok, log yok.",
+    download_on: "App Store'dan İndir", get_it_on: "Google Play'den Al",
+    stat_servers: "Sunucu", stat_countries: "Ülke", stat_logs: "Log Politikası",
+    features_label: "Neden Tulpara", features_title: "Gizliliğiniz için ihtiyacınız olan her şey",
+    features_sub: "Askeri düzeyde şifreleme, yıldırım hızında bağlantı ve sıkı sıfır log politikası.",
+    f1_title: "AES-256 Şifreleme", f1_desc: "Banka düzeyinde şifreleme tüm trafiğinizi korur, hackerlardan ve gözetlenmekten uzak tutar.",
+    f2_title: "Işık Hızında", f2_desc: "Maksimum hız için optimize edilmiş sunucular. Yavaşlama olmadan yayın izleyin, oyun oynayın.",
+    f3_title: "Sıfır Log", f3_desc: "Çevrimiçi aktivitelerinizi asla takip etmez, saklamaz veya paylaşmayız. Gizliliğiniz garanti.",
+    f4_title: "Global Sunucular", f4_desc: "50'den fazla ülkede 100'den fazla sunucuya bağlanın. Her yerden her içeriğe erişin.",
+    f5_title: "Tüm Cihazlar", f5_desc: "iOS, Android ve daha fazlası. Bir hesap tüm cihazlarınızı aynı anda korur.",
+    f6_title: "Kill Switch", f6_desc: "VPN bağlantısı kesilirse internet bağlantınızı otomatik olarak keser, hiç ifşa olmazsınız.",
+    how_label: "Nasıl Çalışır", how_title: "Saniyeler içinde hazır", how_sub: "Teknik bilgi gerekmez. Üç basit adım.",
+    step1_title: "İndir", step1_desc: "Tulpara VPN'i App Store veya Google Play'den ücretsiz indirin.",
+    step2_title: "Bağlan", step2_desc: "Size en yakın hızlı sunucuya bağlanmak için bir kez dokun.",
+    step3_title: "Özgürce Gezin", step3_desc: "Hızlı, özel ve kısıtsız bir internet deneyiminin keyfini çıkarın.",
+    download_label: "Başla", download_title: "Özgürlüğün başladığı yer", download_sub: "iOS ve Android'de mevcut. Hemen ücretsiz indir.",
+    footer_rights: "Tüm hakları saklıdır.", footer_privacy: "Gizlilik Politikası", footer_terms: "Kullanım Koşulları"
+  },
+  es: {
+    hero_tagline: "Acceso a internet rápido, privado y seguro. Navega libre — sin límites, sin registros.",
+    download_on: "Descargar en", get_it_on: "Disponible en",
+    stat_servers: "Servidores", stat_countries: "Países", stat_logs: "Política de Logs",
+    features_label: "Por qué Tulpara", features_title: "Todo lo que necesitas para mantenerte privado",
+    features_sub: "Cifrado de grado militar, velocidades increíbles y una estricta política sin registros.",
+    f1_title: "Cifrado AES-256", f1_desc: "El cifrado bancario protege todo tu tráfico, manteniéndote alejado de hackers.",
+    f2_title: "Ultra Rápido", f2_desc: "Servidores optimizados para máxima velocidad. Transmite, juega y navega sin interrupciones.",
+    f3_title: "Cero Registros", f3_desc: "Nunca rastreamos, almacenamos ni compartimos tu actividad en línea. Tu privacidad está garantizada.",
+    f4_title: "Servidores Globales", f4_desc: "Conéctate a más de 100 servidores en más de 50 países. Accede a cualquier contenido desde cualquier lugar.",
+    f5_title: "Todos los Dispositivos", f5_desc: "iOS, Android y más. Una cuenta protege todos tus dispositivos simultáneamente.",
+    f6_title: "Kill Switch", f6_desc: "Corta automáticamente tu internet si la VPN cae, garantizando que nunca quedes expuesto.",
+    how_label: "Cómo Funciona", how_title: "Listo en segundos", how_sub: "No necesitas conocimientos técnicos. Tres simples pasos.",
+    step1_title: "Descarga", step1_desc: "Obtén Tulpara VPN gratis en App Store o Google Play.",
+    step2_title: "Conecta", step2_desc: "Toca una vez para conectarte al servidor más rápido cerca de ti.",
+    step3_title: "Navega Libre", step3_desc: "Disfruta de una experiencia de internet rápida, privada y sin restricciones.",
+    download_label: "Empezar", download_title: "Tu libertad comienza aquí", download_sub: "Disponible en iOS y Android. Descarga gratis ahora.",
+    footer_rights: "Todos los derechos reservados.", footer_privacy: "Política de Privacidad", footer_terms: "Términos de Servicio"
+  },
+  ru: {
+    hero_tagline: "Быстрый, приватный и безопасный доступ в интернет. Свободная сеть — без ограничений и логов.",
+    download_on: "Загрузить в", get_it_on: "Доступно в",
+    stat_servers: "Серверов", stat_countries: "Стран", stat_logs: "Политика логов",
+    features_label: "Почему Tulpara", features_title: "Всё необходимое для вашей приватности",
+    features_sub: "Военное шифрование, молниеносная скорость и строгая политика нулевых логов.",
+    f1_title: "Шифрование AES-256", f1_desc: "Банковское шифрование защищает весь ваш трафик от хакеров и слежки.",
+    f2_title: "Молниеносная скорость", f2_desc: "Оптимизированные серверы для максимальной скорости. Стримите и играйте без задержек.",
+    f3_title: "Нулевые логи", f3_desc: "Мы никогда не отслеживаем и не храним вашу онлайн-активность. Ваша конфиденциальность гарантирована.",
+    f4_title: "Глобальные серверы", f4_desc: "Подключайтесь к 100+ серверам в 50+ странах. Доступ к любому контенту откуда угодно.",
+    f5_title: "Все устройства", f5_desc: "iOS, Android и другие. Один аккаунт защищает все ваши устройства одновременно.",
+    f6_title: "Kill Switch", f6_desc: "Автоматически отключает интернет при разрыве VPN, чтобы вы никогда не были раскрыты.",
+    how_label: "Как это работает", how_title: "Готово за секунды", how_sub: "Технические знания не нужны. Три простых шага.",
+    step1_title: "Скачайте", step1_desc: "Получите Tulpara VPN бесплатно в App Store или Google Play.",
+    step2_title: "Подключитесь", step2_desc: "Нажмите один раз, чтобы подключиться к ближайшему быстрому серверу.",
+    step3_title: "Серфите свободно", step3_desc: "Наслаждайтесь быстрым, приватным и неограниченным интернетом.",
+    download_label: "Начать", download_title: "Ваша свобода начинается здесь", download_sub: "Доступно на iOS и Android. Скачайте бесплатно.",
+    footer_rights: "Все права защищены.", footer_privacy: "Политика конфиденциальности", footer_terms: "Условия использования"
+  }
+};
+
+function setLang(lang) {
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    if (i18n[lang] && i18n[lang][key]) el.textContent = i18n[lang][key];
+  });
+  document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+  document.querySelector(`.lang-btn[onclick="setLang('${lang}')"]`).classList.add('active');
+  document.documentElement.lang = lang;
+}
+</script>
+</body>
+</html>
