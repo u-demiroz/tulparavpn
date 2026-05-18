@@ -2,186 +2,386 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Terms of Service – Tulpara VPN</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Terms of Service — Tulpara VPN</title>
+  <meta name="description" content="Tulpara VPN Terms of Service — Read our usage terms, subscription rules, and policies." />
+  <link rel="icon" href="assets/logo.png" type="image/png" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
   <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #080810;
+      --bg2: #0e0e1a;
+      --accent: #7c5cfc;
+      --accent2: #a78bfa;
+      --accent-glow: rgba(124, 92, 252, 0.3);
+      --text: #f0f0ff;
+      --text2: #9090b0;
+      --border: rgba(124, 92, 252, 0.2);
+      --card: rgba(255,255,255,0.04);
+    }
+
+    html { scroll-behavior: smooth; }
     body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      max-width: 860px;
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1rem 5%;
+      background: rgba(8, 8, 16, 0.85);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo {
+      display: flex; align-items: center; gap: 0.75rem; text-decoration: none;
+    }
+    .nav-logo img { width: 38px; height: 38px; object-fit: contain; }
+    .nav-logo span { font-size: 1.2rem; font-weight: 700; color: var(--text); letter-spacing: 0.05em; }
+    .nav-logo .vpn-badge {
+      font-size: 0.6rem; font-weight: 600; letter-spacing: 0.12em;
+      color: var(--accent2); border: 1px solid var(--accent);
+      padding: 1px 6px; border-radius: 4px; align-self: center;
+    }
+
+    /* ── PAGE HERO ── */
+    .page-hero {
+      padding: 9rem 5% 4rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .page-hero::before {
+      content: '';
+      position: absolute; top: -10%; left: 50%; transform: translateX(-50%);
+      width: 600px; height: 400px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(124,92,252,0.1) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .page-badge {
+      display: inline-block;
+      font-size: 0.72rem; font-weight: 600; letter-spacing: 0.15em;
+      text-transform: uppercase; color: var(--accent2);
+      border: 1px solid var(--accent); padding: 4px 14px;
+      border-radius: 20px; margin-bottom: 1.25rem;
+      background: rgba(124, 92, 252, 0.08);
+    }
+    .page-hero h1 {
+      font-size: clamp(1.8rem, 4vw, 3rem);
+      font-weight: 800; letter-spacing: -0.02em;
+      margin-bottom: 0.75rem;
+    }
+    .page-hero p {
+      color: var(--text2); font-size: 0.95rem;
+      margin-top: 0.5rem;
+    }
+
+    /* ── CONTENT ── */
+    .content-wrap {
+      max-width: 800px;
       margin: 0 auto;
-      padding: 40px 24px 80px;
-      color: #1a1a1a;
-      line-height: 1.75;
-      background: #fff;
+      padding: 2rem 5% 6rem;
     }
-    h1 { font-size: 2rem; margin-bottom: 0.25em; }
-    h2 { font-size: 1.25rem; margin-top: 2.5em; border-bottom: 2px solid #eee; padding-bottom: 6px; }
-    p, ul, ol { margin: 0.75em 0; }
-    ul, ol { padding-left: 1.5em; }
-    li { margin-bottom: 0.4em; }
-    .updated { color: #666; font-size: 0.9rem; margin-bottom: 2em; }
-    a { color: #0055cc; }
+
+    .toc {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 1.5rem 2rem;
+      margin-bottom: 3rem;
+    }
+    .toc h2 {
+      font-size: 0.8rem; font-weight: 600; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--accent2); margin-bottom: 1rem;
+    }
+    .toc ol {
+      padding-left: 1.25rem;
+      display: flex; flex-direction: column; gap: 0.5rem;
+    }
+    .toc a {
+      color: var(--text2); text-decoration: none; font-size: 0.9rem;
+      transition: color 0.2s;
+    }
+    .toc a:hover { color: var(--accent2); }
+
+    .section-block {
+      margin-bottom: 3rem;
+    }
+    .section-block h2 {
+      display: flex; align-items: center; gap: 0.75rem;
+      font-size: 1.15rem; font-weight: 700;
+      color: var(--text);
+      padding-bottom: 0.75rem;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 1.25rem;
+    }
+    .section-block h2 .sec-num {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 28px; height: 28px; border-radius: 8px;
+      background: rgba(124, 92, 252, 0.15);
+      color: var(--accent2); font-size: 0.8rem; font-weight: 700;
+      flex-shrink: 0;
+    }
+    .section-block h3 {
+      font-size: 0.95rem; font-weight: 600;
+      color: var(--accent2); margin: 1.5rem 0 0.6rem;
+    }
+    .section-block p {
+      font-size: 0.9rem; color: var(--text2);
+      line-height: 1.8; margin-bottom: 0.75rem;
+    }
+    .section-block ul, .section-block ol {
+      padding-left: 1.5rem;
+      display: flex; flex-direction: column; gap: 0.5rem;
+      margin-bottom: 0.75rem;
+    }
+    .section-block li {
+      font-size: 0.875rem; color: var(--text2); line-height: 1.7;
+    }
+    .section-block li strong { color: var(--text); }
+
     .highlight-box {
-      background: #f5f8ff;
-      border-left: 4px solid #0055cc;
-      padding: 16px 20px;
-      border-radius: 4px;
-      margin: 1em 0;
+      background: rgba(124, 92, 252, 0.07);
+      border: 1px solid rgba(124, 92, 252, 0.3);
+      border-radius: 12px;
+      padding: 1.25rem 1.5rem;
+      margin: 1rem 0;
     }
+    .highlight-box p {
+      margin-bottom: 0.5rem;
+      font-size: 0.875rem; color: var(--text2); line-height: 1.75;
+    }
+    .highlight-box ul {
+      padding-left: 1.25rem;
+      display: flex; flex-direction: column; gap: 0.4rem;
+    }
+    .highlight-box li {
+      font-size: 0.875rem; color: var(--text2); line-height: 1.6;
+    }
+    .highlight-box li strong { color: var(--text); }
+
+    .warning-box {
+      background: rgba(239, 68, 68, 0.06);
+      border: 1px solid rgba(239, 68, 68, 0.25);
+      border-radius: 12px;
+      padding: 1rem 1.5rem;
+      margin: 1rem 0;
+    }
+    .warning-box p {
+      font-size: 0.875rem; color: #fca5a5; line-height: 1.7; margin: 0;
+    }
+
+    .contact-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 1.75rem 2rem;
+      display: flex; align-items: center; gap: 1.25rem;
+      margin-top: 1rem;
+    }
+    .contact-icon {
+      width: 48px; height: 48px; border-radius: 12px;
+      background: rgba(124,92,252,0.15);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.4rem; flex-shrink: 0;
+    }
+    .contact-card p { font-size: 0.875rem; color: var(--text2); margin: 0; line-height: 1.6; }
+    .contact-card a { color: var(--accent2); text-decoration: none; }
+    .contact-card a:hover { text-decoration: underline; }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 2rem 5%; text-align: center;
+      color: var(--text2); font-size: 0.8rem;
+    }
+    footer a { color: var(--accent2); text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
   </style>
 </head>
 <body>
 
-  <h1>Terms of Service</h1>
-  <p class="updated">Last updated: May 18, 2025 &nbsp;|&nbsp; Tulpara VPN</p>
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="index.html">
+    <img src="assets/logo.png" alt="Tulpara" />
+    <span>TULPARA</span>
+    <span class="vpn-badge">VPN</span>
+  </a>
+</nav>
 
-  <p>
-    Please read these Terms of Service ("Terms") carefully before using the Tulpara VPN mobile
-    application ("App", "Service") operated by Tulpara ("we", "us", or "our"). By downloading,
-    installing, or using the App, you agree to be bound by these Terms. If you do not agree,
-    do not use the App.
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <div class="page-badge">Legal</div>
+  <h1>Terms of Service</h1>
+  <p>Last updated: May 18, 2025</p>
+</div>
+
+<!-- CONTENT -->
+<div class="content-wrap">
+
+  <!-- TABLE OF CONTENTS -->
+  <div class="toc">
+    <h2>Contents</h2>
+    <ol>
+      <li><a href="#subscriptions">Subscriptions &amp; Auto-Renewal</a></li>
+      <li><a href="#acceptable-use">Acceptable Use Policy</a></li>
+      <li><a href="#liability">Disclaimer of Warranties &amp; Limitation of Liability</a></li>
+      <li><a href="#changes">Changes to the Service &amp; Pricing</a></li>
+      <li><a href="#contact">Contact Us</a></li>
+    </ol>
+  </div>
+
+  <p style="font-size:0.9rem; color:var(--text2); line-height:1.8; margin-bottom:2.5rem;">
+    Please read these Terms of Service ("Terms") carefully before using the <strong style="color:var(--text)">Tulpara VPN</strong>
+    mobile application ("App", "Service"). By downloading, installing, or using the App, you agree to be bound by these Terms.
+    If you do not agree, please do not use the App.
   </p>
 
-  <!-- ═══════════════════════════════════════════════════════════════ -->
-  <h2>1. Subscriptions and Auto-Renewal</h2>
-
-  <div class="highlight-box">
+  <!-- 1. SUBSCRIPTIONS -->
+  <div class="section-block" id="subscriptions">
+    <h2><span class="sec-num">1</span> Subscriptions &amp; Auto-Renewal</h2>
     <p>
-      Tulpara VPN offers auto-renewable subscription plans that unlock full access to our
-      premium VPN service. By subscribing, you agree to the following:
+      Tulpara VPN offers auto-renewable subscription plans that unlock full access to our premium VPN service.
+      By subscribing, you agree to the following:
     </p>
-    <ul>
-      <li>
-        <strong>Payment:</strong> Payment will be charged to your Apple ID account at the
-        confirmation of purchase.
-      </li>
-      <li>
-        <strong>Auto-Renewal:</strong> Subscription automatically renews unless it is canceled
-        at least 24 hours before the end of the current period.
-      </li>
-      <li>
-        <strong>Renewal Charge:</strong> Your account will be charged for renewal within
-        24 hours prior to the end of the current period.
-      </li>
-      <li>
-        <strong>Managing Subscriptions:</strong> You can manage and cancel your subscriptions
-        by going to your account settings on the App Store after purchase.
-      </li>
-      <li>
-        <strong>Free Trials:</strong> Any unused portion of a free trial period, if offered,
-        will be forfeited when the user purchases a subscription to that publication,
-        where applicable.
-      </li>
-    </ul>
+    <div class="highlight-box">
+      <ul>
+        <li>
+          <strong>Payment:</strong> Payment will be charged to your Apple ID account at the confirmation of purchase.
+        </li>
+        <li>
+          <strong>Auto-Renewal:</strong> Subscription automatically renews unless it is canceled at least 24 hours
+          before the end of the current period.
+        </li>
+        <li>
+          <strong>Renewal Charge:</strong> Your account will be charged for renewal within 24 hours prior to the
+          end of the current period.
+        </li>
+        <li>
+          <strong>Managing Subscriptions:</strong> You can manage and cancel your subscriptions by going to your
+          account settings on the App Store after purchase.
+        </li>
+        <li>
+          <strong>Free Trials:</strong> Any unused portion of a free trial period, if offered, will be forfeited
+          when the user purchases a subscription to that publication, where applicable.
+        </li>
+      </ul>
+    </div>
     <p>
-      Subscription prices are displayed in the App and are subject to change. We are not
-      responsible for any charges resulting from failure to cancel a subscription in time.
-      Refunds, if any, are handled solely by Apple in accordance with their policies.
+      Subscription prices are displayed in the App and are subject to change. We are not responsible for any
+      charges resulting from failure to cancel a subscription before the renewal date. Refunds, if applicable,
+      are handled solely by Apple in accordance with their App Store policies.
     </p>
   </div>
 
-  <!-- ═══════════════════════════════════════════════════════════════ -->
-  <h2>2. Acceptable Use Policy</h2>
+  <!-- 2. ACCEPTABLE USE -->
+  <div class="section-block" id="acceptable-use">
+    <h2><span class="sec-num">2</span> Acceptable Use Policy</h2>
+    <p>
+      Tulpara VPN is designed to help users protect their privacy and access the internet freely.
+      You agree to use the Service only for lawful purposes and in a manner consistent with all applicable laws.
+    </p>
+    <h3>You may NOT use our network or Service to:</h3>
+    <ul>
+      <li>Send unsolicited bulk email (spam) or engage in any form of mass unsolicited messaging.</li>
+      <li>Download, distribute, or share copyrighted content without authorization (e.g., illegal torrenting or piracy).</li>
+      <li>Transmit or store any content that is illegal, obscene, defamatory, or that violates the rights of others.</li>
+      <li>Conduct or facilitate hacking, port scanning, denial-of-service (DDoS) attacks, or any other malicious network activity.</li>
+      <li>Distribute malware, viruses, ransomware, or any other harmful software.</li>
+      <li>Engage in human trafficking, drug trade, terrorism-related activities, or any activity prohibited by applicable law.</li>
+      <li>Attempt to circumvent any security, authentication, or access-control mechanism of any system.</li>
+    </ul>
+    <div class="warning-box">
+      <p>
+        ⚠️ We reserve the right to suspend or permanently terminate your account, without prior notice or liability,
+        for any violation of this Acceptable Use Policy. Repeated or severe violations may be reported to relevant authorities.
+      </p>
+    </div>
+  </div>
 
-  <p>
-    Tulpara VPN provides its service to help users protect their privacy, secure their
-    internet connection, and access content freely. You agree to use the Service only for
-    lawful purposes and in a manner consistent with all applicable laws and regulations.
-  </p>
+  <!-- 3. LIABILITY -->
+  <div class="section-block" id="liability">
+    <h2><span class="sec-num">3</span> Disclaimer of Warranties &amp; Limitation of Liability</h2>
 
-  <p><strong>You may not use our network or Service to:</strong></p>
-  <ul>
-    <li>Send unsolicited bulk email (spam) or engage in any form of mass unsolicited messaging.</li>
-    <li>Download, distribute, or share copyrighted content without authorization (e.g., illegal torrenting or piracy).</li>
-    <li>Transmit, distribute, or store any content that is illegal, obscene, defamatory, or that violates the rights of others.</li>
-    <li>Conduct or facilitate hacking, port scanning, denial-of-service (DDoS) attacks, or any other malicious network activity.</li>
-    <li>Access, tamper with, or use non-public areas of any computer system without authorization.</li>
-    <li>Distribute malware, viruses, ransomware, or any other harmful software.</li>
-    <li>Engage in human trafficking, drug trade, terrorism-related activities, or any activity prohibited by applicable law.</li>
-    <li>Attempt to circumvent any security, authentication, or access-control mechanism.</li>
-  </ul>
+    <h3>Service "As-Is"</h3>
+    <p>
+      The Service is provided on an <strong>"as-is" and "as-available"</strong> basis without warranties of any kind,
+      either express or implied. We do not warrant that:
+    </p>
+    <ul>
+      <li>The Service will be uninterrupted or error-free at all times.</li>
+      <li>Servers will be available 100% of the time — scheduled or emergency maintenance may temporarily affect connectivity.</li>
+      <li>Connection speeds will meet any specific threshold, as performance may vary based on your location, device, and network.</li>
+    </ul>
 
-  <p>
-    We reserve the right to suspend or permanently terminate your account, without prior
-    notice or liability, for any violation of this Acceptable Use Policy. Repeated or
-    severe violations may be reported to relevant authorities.
-  </p>
+    <h3>User Responsibility</h3>
+    <p>
+      You are solely responsible for all activities conducted through your use of the Service.
+      <strong>Tulpara VPN shall not be held liable</strong> for any files you download, websites you visit, actions you take,
+      or content you access while connected to the Service. By using Tulpara VPN, you acknowledge that you bear full and
+      exclusive responsibility for your online activities.
+    </p>
 
-  <!-- ═══════════════════════════════════════════════════════════════ -->
-  <h2>3. Disclaimer of Warranties &amp; Limitation of Liability</h2>
+    <h3>Limitation of Liability</h3>
+    <p>
+      To the maximum extent permitted by applicable law, Tulpara and its affiliates, officers, employees, and agents
+      shall not be liable for any indirect, incidental, special, consequential, or punitive damages — including but not
+      limited to loss of data, loss of profits, or business interruption — arising from your use of or inability to use
+      the Service, even if we have been advised of the possibility of such damages.
+    </p>
+  </div>
 
-  <h3 style="font-size:1rem; margin-top:1.2em;">Service "As-Is"</h3>
-  <p>
-    The Service is provided on an <strong>"as-is" and "as-available"</strong> basis without
-    warranties of any kind, either express or implied. We do not warrant that:
-  </p>
-  <ul>
-    <li>The Service will be uninterrupted, error-free, or completely secure at all times.</li>
-    <li>Servers will be available 100% of the time; scheduled or emergency maintenance may temporarily affect connectivity.</li>
-    <li>Connection speeds will meet any specific threshold, as performance may vary based on your location, device, and network conditions.</li>
-  </ul>
+  <!-- 4. CHANGES -->
+  <div class="section-block" id="changes">
+    <h2><span class="sec-num">4</span> Changes to the Service &amp; Pricing</h2>
+    <p>
+      We reserve the right, at our sole discretion, to modify, suspend, or discontinue any part of the Service
+      at any time, with or without prior notice. This includes, but is not limited to:
+    </p>
+    <ul>
+      <li>Changing subscription prices or available plans.</li>
+      <li>Adding, removing, or modifying features and server locations.</li>
+      <li>Updating these Terms of Service.</li>
+    </ul>
+    <p>
+      Price changes will take effect at the start of your next billing period. We will make reasonable efforts to
+      notify you of significant changes via the App or the email address associated with your account. Your continued
+      use of the Service after any such change constitutes your acceptance of the updated Terms.
+    </p>
+  </div>
 
-  <h3 style="font-size:1rem; margin-top:1.2em;">User Responsibility</h3>
-  <p>
-    You are solely responsible for all activities conducted through your use of the Service.
-    <strong>Tulpara VPN shall not be held liable</strong> for any files you download, websites
-    you visit, actions you take, or content you access while using the Service. By using
-    Tulpara VPN, you acknowledge that you bear full and exclusive responsibility for your
-    online activities.
-  </p>
+  <!-- 5. CONTACT -->
+  <div class="section-block" id="contact">
+    <h2><span class="sec-num">5</span> Contact Us</h2>
+    <p>
+      If you have any questions, concerns, or requests regarding these Terms of Service, feel free to reach out:
+    </p>
+    <div class="contact-card">
+      <div class="contact-icon">✉️</div>
+      <div>
+        <p><strong style="color:var(--text)">Tulpara VPN Support</strong></p>
+        <p><a href="mailto:hello@tulpara.com">hello@tulpara.com</a></p>
+      </div>
+    </div>
+  </div>
 
-  <h3 style="font-size:1rem; margin-top:1.2em;">Limitation of Liability</h3>
-  <p>
-    To the maximum extent permitted by applicable law, Tulpara and its affiliates, officers,
-    employees, and agents shall not be liable for any indirect, incidental, special,
-    consequential, or punitive damages — including but not limited to loss of data, loss of
-    profits, or business interruption — arising from your use of or inability to use the
-    Service, even if we have been advised of the possibility of such damages.
-  </p>
+</div>
 
-  <!-- ═══════════════════════════════════════════════════════════════ -->
-  <h2>4. Changes to the Service &amp; Pricing</h2>
-
-  <p>
-    We reserve the right, at our sole discretion, to modify, suspend, or discontinue any
-    part of the Service at any time, with or without prior notice. This includes, but is
-    not limited to:
-  </p>
-  <ul>
-    <li>Changing subscription prices or available plans.</li>
-    <li>Adding, removing, or modifying features and server locations.</li>
-    <li>Updating these Terms of Service.</li>
-  </ul>
-  <p>
-    Price changes will take effect at the start of your next billing period. We will make
-    reasonable efforts to notify you of significant changes via the App or the email address
-    associated with your account. Your continued use of the Service after any such change
-    constitutes your acceptance of the new Terms.
-  </p>
-  <p>
-    We also reserve the right to amend these Terms at any time. The "Last updated" date at
-    the top of this page indicates when the most recent changes were made. It is your
-    responsibility to review these Terms periodically.
-  </p>
-
-  <!-- ═══════════════════════════════════════════════════════════════ -->
-  <h2>5. Governing Law</h2>
-  <p>
-    These Terms shall be governed by and construed in accordance with applicable laws,
-    without regard to conflict of law provisions. Any disputes arising under these Terms
-    shall be subject to the exclusive jurisdiction of the competent courts.
-  </p>
-
-  <!-- ═══════════════════════════════════════════════════════════════ -->
-  <h2>6. Contact Us</h2>
-  <p>
-    If you have any questions, concerns, or requests regarding these Terms of Service,
-    please do not hesitate to reach out:
-  </p>
-  <p>
-    <strong>Tulpara VPN Support</strong><br/>
-    📧 <a href="mailto:hello@tulpara.com">hello@tulpara.com</a>
-  </p>
+<!-- FOOTER -->
+<footer>
+  <p>© 2024 Tulpara VPN. All rights reserved.
+  &nbsp;·&nbsp; <a href="privacy-policy.html">Privacy Policy</a>
+  &nbsp;·&nbsp; <a href="terms-of-service.html">Terms of Service</a>
+  &nbsp;·&nbsp; <a href="support.html">Support</a></p>
+</footer>
 
 </body>
 </html>
